@@ -1,0 +1,1771 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sustentabilidade, Saúde, Segurança e Qualidade de Vida no Trabalho — Guia de Estudos</title>
+<meta name="description" content="Guia de estudos interativo sobre sustentabilidade e responsabilidade socioambiental, promoção da saúde, qualidade de vida no trabalho, endomarketing, legislação de SST, riscos ocupacionais, SESMT, CIPA e CAT.">
+<style>
+  :root{
+    --bg:#eef1f3; --surface:#ffffff; --surface-2:#f4f6f7; --surface-3:#e7ebed;
+    --ink:#1b2326; --ink-dim:#5c6b70; --rule:#d7dee1;
+    --accent:#0f6e8c; --accent-soft:#dff0f5;
+    --good:#2f9e5c; --warn:#c2871f; --bad:#c23b3b;
+    --cat-1:#0f6e8c; --cat-2:#2f9e5c; --cat-3:#c2871f; --cat-4:#6a4fa0; --cat-5:#c23b7a;
+    --bar-h:56px;
+    --font-display: -apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+    --font-body: Georgia,"Iowan Old Style","Sitka Text","Noto Serif",serif;
+    --font-mono: ui-monospace,"Cascadia Mono","SF Mono",Consolas,"Roboto Mono",monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#10161a; --surface:#161d22; --surface-2:#1c242a; --surface-3:#232c33;
+      --ink:#e7eef1; --ink-dim:#93a3aa; --rule:#2a343b;
+      --accent:#5fd0f2; --accent-soft:#163440;
+      --good:#5fc98a; --warn:#dba43f; --bad:#e2685f;
+      --cat-1:#5fd0f2; --cat-2:#5fc98a; --cat-3:#dba43f; --cat-4:#a98ce0; --cat-5:#e287b0;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#10161a; --surface:#161d22; --surface-2:#1c242a; --surface-3:#232c33;
+    --ink:#e7eef1; --ink-dim:#93a3aa; --rule:#2a343b;
+    --accent:#5fd0f2; --accent-soft:#163440;
+    --good:#5fc98a; --warn:#dba43f; --bad:#e2685f;
+    --cat-1:#5fd0f2; --cat-2:#5fc98a; --cat-3:#dba43f; --cat-4:#a98ce0; --cat-5:#e287b0;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;}
+  body{background:var(--bg); color:var(--ink); font-family:var(--font-body); line-height:1.55; -webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:var(--font-display); font-weight:800; letter-spacing:-.01em; text-wrap:balance; margin:0; color:var(--ink);}
+  p{margin:0 0 .75em 0;}
+  .mono{font-family:var(--font-mono); font-variant-numeric:tabular-nums;}
+  .eyebrow{font-family:var(--font-mono); font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--accent);}
+  button{font-family:inherit;}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  @media (prefers-reduced-motion: reduce){ *{animation-duration:.01ms !important; transition-duration:.01ms !important;} }
+  ::-webkit-scrollbar{width:10px;height:10px;}
+  ::-webkit-scrollbar-thumb{background:var(--rule); border-radius:6px;}
+
+  /* ============ APP SHELL ============ */
+  .deck{display:flex; height:100vh; height:100dvh; background:var(--bg);}
+  .rail{
+    width:272px; flex:none; background:var(--surface); border-right:1px solid var(--rule);
+    display:flex; flex-direction:column; transition:margin-left .2s; overflow:hidden;
+  }
+  .rail-scroll{flex:1; overflow-y:auto; padding:18px 12px 18px; min-height:0;}
+  .rail-brand{padding:4px 10px 16px;}
+  .rail-brand h1{font-size:1rem; line-height:1.3;}
+  .rail-mod{margin-bottom:4px;}
+  .rail-mod-head{
+    display:flex; align-items:center; gap:8px; padding:9px 10px;
+    font-size:.76rem; font-weight:700; color:var(--ink-dim); letter-spacing:.02em; font-family:var(--font-display);
+    cursor:pointer; border-radius:6px;
+  }
+  .rail-mod-head:hover{background:var(--surface-2);}
+  .rail-mod-head .num{font-family:var(--font-mono); color:var(--accent); font-size:.72rem;}
+  .rail-slides{padding-left:6px; border-left:1px solid var(--rule); margin:2px 0 10px 18px;}
+  .rail-item{
+    display:flex; align-items:center; gap:8px; width:100%; text-align:left;
+    background:none; border:none; padding:6px 10px; font-size:.8rem; color:var(--ink-dim); font-family:var(--font-body);
+    cursor:pointer; border-radius:6px; line-height:1.3;
+  }
+  .rail-item:hover{background:var(--surface-2); color:var(--ink);}
+  .rail-item.current{background:var(--accent-soft); color:var(--accent); font-weight:700;}
+  .rail-item .dot{width:5px; height:5px; border-radius:50%; background:var(--rule); flex:none;}
+  .rail-item.visited .dot{background:var(--good);}
+  .rail-footer{
+    flex:none; background:var(--surface); padding:0 14px; border-top:1px solid var(--rule);
+    font-size:.7rem; color:var(--ink-dim); height:var(--bar-h); box-sizing:border-box;
+    display:flex; align-items:center; overflow:hidden;
+  }
+  .rail-footer a{color:var(--accent); text-decoration:none; font-weight:700;}
+  .rail-footer a:hover{text-decoration:underline;}
+
+  .main{flex:1; display:flex; flex-direction:column; min-width:0;}
+  .navbar{
+    display:flex; align-items:center; gap:12px; padding:0 18px;
+    border-top:1px solid var(--rule); background:var(--surface); flex:none;
+    height:var(--bar-h); box-sizing:border-box; overflow-x:auto;
+  }
+  .navbar .crumb{font-size:.8rem; color:var(--ink-dim); white-space:nowrap;}
+  .navbar .crumb strong{color:var(--ink);}
+  .progress-track{flex:1; height:5px; background:var(--surface-3); border-radius:4px; overflow:hidden; min-width:80px;}
+  .progress-fill{height:100%; background:var(--accent); width:0%; transition:width .2s;}
+  .navbar .count{font-family:var(--font-mono); font-size:.76rem; color:var(--ink-dim); white-space:nowrap;}
+  .navbar .score{font-family:var(--font-mono); font-size:.76rem; color:var(--good); white-space:nowrap;}
+  .navbar .nav-arrows{display:flex; align-items:center; gap:8px; flex:none;}
+  .corner-controls{position:fixed; top:16px; right:16px; z-index:20; display:flex; gap:8px;}
+  .iconbtn{
+    background:var(--surface-2); border:1px solid var(--rule); border-radius:7px;
+    width:34px; height:34px; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; color:var(--ink); flex:none; font-size:1rem;
+  }
+  .iconbtn:hover{border-color:var(--accent); color:var(--accent);}
+  .iconbtn[disabled]{opacity:.35; pointer-events:none;}
+
+  .stage-wrap{flex:1; overflow-y:auto; position:relative; display:flex; justify-content:center;}
+  .stage{width:100%; max-width:860px; padding:44px clamp(20px,4vw,48px) 72px;}
+  .slide{animation:slideIn .22s ease;}
+  @keyframes slideIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+
+  .slide-kicker{display:block; margin-bottom:8px;}
+  .slide h2{font-size:clamp(1.5rem,3.4vw,2.15rem); margin-bottom:14px;}
+  .slide .lede{font-size:1.02rem; color:var(--ink-dim); max-width:62ch; margin-bottom:22px;}
+  .block{margin-bottom:26px;}
+  .block h3{font-size:1.05rem; margin-bottom:10px; font-family:var(--font-display);}
+  .block h4{font-size:.92rem; margin-bottom:6px;}
+
+  /* ---- welcome ---- */
+  .welcome{max-width:600px; margin:30px auto; text-align:center;}
+  .welcome .eyebrow{display:block; margin-bottom:16px;}
+  .welcome h2{font-size:clamp(1.8rem,4vw,2.5rem); margin-bottom:18px;}
+  .welcome p{font-size:1.02rem; color:var(--ink-dim); margin-bottom:14px;}
+  .welcome p.sign{color:var(--ink); font-style:italic; margin-top:24px; line-height:1.7;}
+  .welcome a{color:var(--accent); text-decoration:none; font-weight:700;}
+  .welcome a:hover{text-decoration:underline;}
+  .welcome .btn{margin-top:10px;}
+
+  /* ============ IMMERSIVE ============ */
+  .deck.immersive .rail{margin-left:-272px; width:0; padding:0; border:none; overflow:hidden;}
+  .deck.immersive .rail.open{margin-left:0; width:272px; border-right:1px solid var(--rule); overflow:hidden; z-index:12;}
+  .deck.immersive .navbar{position:absolute; bottom:0; left:0; right:0; z-index:4; background:color-mix(in srgb, var(--surface) 88%, transparent); backdrop-filter:blur(6px);}
+  .deck.immersive .stage{max-width:960px;}
+
+  @media (max-width:860px){
+    .rail{position:fixed; z-index:10; height:100%; margin-left:-272px;}
+    .rail.open{margin-left:0; box-shadow:0 0 30px rgba(0,0,0,.25);}
+    .navbar .crumb{display:none;}
+  }
+
+  /* ============ GENERIC COMPONENTS ============ */
+  .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
+  .grid-4{display:grid; grid-template-columns:repeat(4,1fr); gap:12px;}
+  .grid-5{display:grid; grid-template-columns:repeat(5,1fr); gap:12px;}
+  @media (max-width:700px){ .grid-2,.grid-3,.grid-4,.grid-5{grid-template-columns:1fr;} }
+
+  .card{background:var(--surface-2); border:1px solid var(--rule); border-top:3px solid var(--cat-1); border-radius:10px; padding:16px 18px;}
+  .card:nth-child(5n+1){border-top-color:var(--cat-1);}
+  .card:nth-child(5n+2){border-top-color:var(--cat-2);}
+  .card:nth-child(5n+3){border-top-color:var(--cat-3);}
+  .card:nth-child(5n+4){border-top-color:var(--cat-4);}
+  .card:nth-child(5n+5){border-top-color:var(--cat-5);}
+  .card h4{font-size:.92rem; font-family:var(--font-display);}
+  .card p{font-size:.88rem; color:var(--ink-dim); margin-bottom:0;}
+  .formula{font-family:var(--font-mono); font-size:.85rem; background:var(--surface-3); border-radius:6px; padding:5px 9px; display:inline-block; margin:6px 0;}
+  .card .note{font-size:.8rem; color:var(--ink-dim); margin-top:6px;}
+  .tag{display:inline-block; font-size:.62rem; letter-spacing:.06em; text-transform:uppercase; padding:2px 8px; border-radius:10px;}
+  .tag.good{background:color-mix(in srgb, var(--good) 18%, transparent); color:var(--good);}
+  .tag.warn{background:color-mix(in srgb, var(--warn) 18%, transparent); color:var(--warn);}
+  .tag.bad{background:color-mix(in srgb, var(--bad) 18%, transparent); color:var(--bad);}
+
+  .example{
+    border-left:3px solid var(--accent); background:var(--surface-2);
+    padding:10px 14px; border-radius:0 8px 8px 0; font-size:.86rem; margin-top:10px;
+  }
+  .example .eyebrow{display:block; margin-bottom:4px;}
+
+  /* ---- radial diagram ---- */
+  .interfaces-wrap{display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap;}
+  .radial{position:relative; width:280px; height:280px; flex:none; margin:0 auto;}
+  .radial-spokes{position:absolute; inset:0; pointer-events:none; width:100%; height:100%;}
+  .radial .hub{
+    position:absolute; top:50%; left:50%; width:102px; height:102px; margin:-51px 0 0 -51px;
+    border-radius:50%; background:var(--accent-soft); border:2px solid var(--accent);
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    font-family:var(--font-display); font-weight:800; font-size:.74rem; line-height:1.15; padding:6px;
+    box-shadow:0 0 0 6px var(--surface);
+  }
+  .radial .node{
+    position:absolute; width:80px; height:80px; margin:-40px 0 0 -40px; border-radius:50%;
+    background:var(--surface-2); border:2px dashed var(--rule);
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    font-size:.7rem; font-weight:600; cursor:pointer; padding:4px;
+    transition:border-color .15s, background .15s, transform .15s, box-shadow .15s;
+  }
+  .radial .node:hover{transform:scale(1.07);}
+  .radial .node.visited{border-style:solid;}
+  .radial .node.sel{transform:scale(1.1); box-shadow:0 6px 16px rgba(0,0,0,.14); z-index:2;}
+  .radial .node .check{
+    position:absolute; top:-6px; right:-2px; width:20px; height:20px; border-radius:50%;
+    color:#fff; font-size:.6rem; display:flex; align-items:center; justify-content:center;
+    opacity:0; transform:scale(.4); transition:opacity .15s, transform .15s;
+  }
+  .radial .node.visited .check{opacity:1; transform:scale(1);}
+  .interfaces-desc{flex:1; min-width:220px; background:var(--surface-2); border:1px solid var(--rule); border-radius:10px; padding:16px 18px; min-height:110px;}
+  .interfaces-progress{font-family:var(--font-mono); font-size:.68rem; color:var(--ink-dim); margin-top:10px; letter-spacing:.04em;}
+
+  /* ---- numbered steps ---- */
+  .steps{counter-reset:step; display:flex; flex-direction:column; gap:14px;}
+  .step{display:grid; grid-template-columns:34px 1fr; gap:12px;}
+  .step .sn{
+    counter-increment:step; width:34px; height:34px; border-radius:50%;
+    background:var(--accent-soft); color:var(--accent); border:1px solid var(--accent);
+    display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-weight:700; font-size:.82rem;
+  }
+  .step .sn::before{content:counter(step);}
+  .step .st h4{font-size:.9rem; margin-bottom:3px; font-family:var(--font-display);}
+  .step .st p{font-size:.85rem; color:var(--ink-dim); margin-bottom:0;}
+
+  /* ---- bar chart ---- */
+  .bars{display:flex; flex-direction:column; gap:7px;}
+  .bar-row{display:grid; grid-template-columns:170px 1fr 86px; gap:10px; align-items:center; font-size:.82rem;}
+  .bar-row .lbl{color:var(--ink-dim);}
+  .bar-row.total .lbl{color:var(--ink); font-weight:700;}
+  .bar-track{height:16px; background:var(--surface-3); border-radius:4px; overflow:hidden; position:relative;}
+  .bar-fill{height:100%; border-radius:4px;}
+  .bar-fill.total{background:var(--accent);}
+  .bar-fill.pos{background:var(--good);}
+  .bar-fill.neg{background:var(--bad);}
+  .bar-row .val{font-family:var(--font-mono); text-align:right;}
+
+  /* ---- stacked pair ---- */
+  .stack-pair{display:flex; gap:28px; align-items:flex-end; justify-content:center; flex-wrap:wrap;}
+  .stack-col{display:flex; flex-direction:column; align-items:center; gap:8px;}
+  .stack-bar{width:150px; height:260px; border-radius:8px; overflow:hidden; display:flex; flex-direction:column; border:1px solid var(--rule);}
+  .stack-seg{display:flex; align-items:center; justify-content:center; text-align:center; font-size:.68rem; padding:4px; color:#fff;}
+  .stack-col .cap{font-size:.78rem; font-weight:700; color:var(--ink-dim); font-family:var(--font-display);}
+  .dbl-eq{font-family:var(--font-mono); font-size:1.6rem; color:var(--accent); flex:none;}
+
+  /* ---- sequential flow ---- */
+  .seq-flow{display:flex; align-items:stretch; gap:10px; flex-wrap:wrap;}
+  .seq-box{
+    background:var(--surface-2); border:1px solid var(--rule); border-left:4px solid var(--accent);
+    border-radius:8px; padding:10px 14px; font-size:.78rem; font-weight:600; text-align:center;
+    flex:1 1 150px; min-width:150px; max-width:220px; line-height:1.35;
+    overflow-wrap:break-word; word-break:break-word; hyphens:auto;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .seq-arrow{color:var(--ink-dim); font-size:1.1rem; flex:none; display:flex; align-items:center;}
+
+  /* ---- tree ---- */
+  .tree{font-size:.86rem;}
+  .tree-node{border-left:2px solid var(--rule); margin-left:10px; padding-left:16px; margin-top:6px;}
+  .tree-node.l0{border-left:none; margin-left:0; padding-left:0;}
+  .tree-label{background:var(--surface-2); border:1px solid var(--rule); border-radius:7px; padding:6px 11px; display:inline-block; margin-bottom:2px;}
+  .tree-label.l0{background:var(--accent-soft); border-color:var(--accent); color:var(--accent); font-weight:700;}
+  .tree-label .code{font-family:var(--font-mono); font-size:.72rem; color:var(--ink-dim); margin-right:6px;}
+
+  /* ---- pyramid ---- */
+  .pyramid-wrap{margin:36px auto 0; max-width:520px;}
+  .pyramid{display:flex; flex-direction:column; align-items:center; gap:6px;}
+  .pyr-layer{
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    padding:16px 14px; border-radius:6px; color:#fff; font-size:.84rem; font-weight:700; font-family:var(--font-display);
+  }
+
+  /* ---- calculators ---- */
+  .calc-form{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; background:var(--surface-2); border:1px solid var(--rule); border-radius:10px; padding:16px;}
+  @media (max-width:700px){ .calc-form{grid-template-columns:repeat(2,1fr);} }
+  .calc-form label{display:flex; flex-direction:column; gap:3px; font-size:.66rem; color:var(--ink-dim);}
+  .calc-form select, .calc-form input{font-family:var(--font-mono); font-size:.88rem; background:var(--surface); border:1px solid var(--rule); border-radius:6px; padding:6px 8px; color:var(--ink); width:100%;}
+  .calc-form.mini{grid-template-columns:repeat(3,1fr); padding:14px;}
+  @media (max-width:560px){ .calc-form.mini{grid-template-columns:repeat(2,1fr);} }
+  .calc-card{margin-bottom:16px;}
+  .calc-result{display:flex; gap:18px; flex-wrap:wrap; margin-top:12px;}
+  .calc-result .cr-item{background:var(--accent-soft); border-radius:8px; padding:10px 16px; flex:1; min-width:140px;}
+  .calc-result .cr-label{display:block; font-size:.66rem; color:var(--ink-dim); text-transform:uppercase; letter-spacing:.05em; margin-bottom:3px;}
+  .calc-result .cr-value{font-family:var(--font-mono); font-size:1.15rem; font-weight:700; color:var(--accent);}
+
+  .btn{background:var(--accent); color:var(--surface); border:none; border-radius:7px; padding:8px 16px; font-weight:700; font-size:.8rem; cursor:pointer; font-family:var(--font-display);}
+  .btn.ghost{background:transparent; color:var(--ink); border:1px solid var(--rule);}
+  .btn.ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn.small{padding:5px 11px; font-size:.72rem;}
+
+  /* ---- flip cards ---- */
+  .flip-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
+  @media (max-width:700px){ .flip-grid{grid-template-columns:repeat(2,1fr);} }
+  .flip-card{perspective:1000px; height:150px; cursor:pointer;}
+  .flip-inner{position:relative; width:100%; height:100%; transition:transform .5s; transform-style:preserve-3d;}
+  .flip-card.flipped .flip-inner{transform:rotateY(180deg);}
+  .flip-face{position:absolute; inset:0; backface-visibility:hidden; border:1px solid var(--rule); border-radius:10px; padding:14px; display:flex; flex-direction:column; justify-content:center;}
+  .flip-front{background:var(--surface-2);}
+  .flip-front h4{font-size:.94rem; margin-top:6px; font-family:var(--font-display);}
+  .flip-front .tap{margin-top:auto; font-size:.64rem; color:var(--ink-dim);}
+  .flip-back{background:var(--accent-soft); transform:rotateY(180deg); font-size:.78rem; color:var(--ink); overflow:auto;}
+
+  /* ---- document mockup ---- */
+  .doc-mock{background:var(--surface); border:1px solid var(--rule); border-radius:10px; overflow:hidden; box-shadow:0 1px 0 rgba(0,0,0,.04);}
+  .doc-mock .dm-head{background:var(--accent-soft); color:var(--accent); padding:12px 18px; border-bottom:2px solid var(--accent);}
+  .doc-mock .dm-head .eyebrow{color:var(--accent);}
+  .doc-mock .dm-head h4{font-size:1rem; margin-top:2px; font-family:var(--font-display);}
+  .doc-mock .dm-body{padding:14px 18px;}
+  .doc-mock table{width:100%; border-collapse:collapse; font-size:.82rem;}
+  .doc-mock td{padding:5px 4px; border-bottom:1px solid var(--rule);}
+  .doc-mock td.num{text-align:right; font-family:var(--font-mono);}
+  .doc-mock tr.total td{font-weight:700; border-top:1px solid var(--ink-dim);}
+
+  /* ---- risk matrix ---- */
+  .riskmatrix-wrap{display:flex; gap:22px; flex-wrap:wrap; align-items:flex-start;}
+  .riskmatrix{display:grid; grid-template-columns:90px repeat(5,1fr); gap:4px; flex:none; width:100%; max-width:480px;}
+  .rm-head{font-size:.68rem; color:var(--ink-dim); text-align:center; font-weight:700; padding:4px 2px; font-family:var(--font-display);}
+  .rm-rowlabel{font-size:.7rem; color:var(--ink-dim); display:flex; align-items:center; justify-content:flex-end; text-align:right; padding-right:6px; font-weight:700;}
+  .rm-cell{
+    aspect-ratio:1; border-radius:6px; border:none; cursor:pointer; color:#fff; font-family:var(--font-mono);
+    font-size:.72rem; font-weight:700; display:flex; align-items:center; justify-content:center;
+    transition:transform .12s, box-shadow .12s;
+  }
+  .rm-cell:hover{transform:scale(1.08); box-shadow:0 4px 10px rgba(0,0,0,.18); z-index:1;}
+  .rm-cell.sel{outline:3px solid var(--ink); outline-offset:1px;}
+  .rm-axis-x{grid-column:2/7; text-align:center; font-size:.68rem; color:var(--ink-dim); margin-top:4px; letter-spacing:.06em; text-transform:uppercase;}
+  .rm-desc{flex:1; min-width:240px; background:var(--surface-2); border:1px solid var(--rule); border-radius:10px; padding:16px 18px; min-height:150px;}
+  .rm-legend{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; font-size:.68rem; color:var(--ink-dim);}
+  .rm-legend span{display:inline-flex; align-items:center; gap:5px;}
+  .rm-legend i{width:11px; height:11px; border-radius:3px; display:inline-block;}
+
+  .btn{background:var(--accent); color:var(--surface); border:none; border-radius:7px; padding:8px 16px; font-weight:700; font-size:.8rem; cursor:pointer; font-family:var(--font-display);}
+
+  /* ---- exercises / quiz shared ---- */
+  .ex-fb{display:block; font-size:.66rem; margin-top:2px; min-height:1em;}
+  .ex-fb.ok{color:var(--good);}
+  .ex-fb.bad{color:var(--bad);}
+  .exercise-status{font-weight:700; font-size:.88rem; padding:10px 14px; border-radius:8px; margin-bottom:14px;}
+  .exercise-status.ok{background:color-mix(in srgb, var(--good) 16%, var(--surface-2)); color:var(--good);}
+  .exercise-status.warn{background:color-mix(in srgb, var(--warn) 16%, var(--surface-2)); color:var(--warn);}
+  @media print{
+    body *{visibility:hidden;}
+    #printArea, #printArea *{visibility:visible;}
+    #printArea{position:absolute; left:0; top:0; width:100%;}
+  }
+
+  /* ---- connect-the-dots game ---- */
+  @keyframes shake{ 0%,100%{transform:translateX(0);} 25%{transform:translateX(-4px);} 75%{transform:translateX(4px);} }
+  .connect-wrap{position:relative; overflow-x:auto;}
+  .connect-svg{position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:1;}
+  .connect-cols{display:grid; grid-template-columns:1fr 1fr; gap:48px; position:relative; z-index:2; min-width:480px;}
+  .connect-col{display:flex; flex-direction:column; gap:10px;}
+  .connect-card{display:flex; align-items:center; gap:10px; background:var(--surface-2); border:1px solid var(--rule); border-radius:8px; padding:10px 12px; font-size:.84rem;}
+  .cc-text{flex:1;}
+  .cc-dot{
+    width:16px; height:16px; border-radius:50%; border:2px solid var(--accent); background:var(--surface);
+    flex:none; cursor:pointer; transition:background .15s, transform .15s;
+  }
+  .cc-dot:hover{transform:scale(1.2);}
+  .cc-dot.sel{background:var(--accent); box-shadow:0 0 0 4px var(--accent-soft);}
+  .cc-dot.done{background:var(--good); border-color:var(--good); cursor:default;}
+  .cc-dot.wrong{background:var(--bad); border-color:var(--bad); animation:shake .3s;}
+  .connect-footer{display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-top:14px;}
+  .connect-status{font-family:var(--font-mono); font-size:.78rem; color:var(--ink-dim);}
+
+  /* ---- reflection block ---- */
+  .reflect{background:var(--surface-2); border:1px solid var(--rule); border-left:4px solid var(--accent); border-radius:0 10px 10px 0; padding:18px 20px;}
+  .reflect .scenario{font-style:italic; color:var(--ink); margin-bottom:10px;}
+  .reflect .question{font-weight:700; margin-bottom:12px; font-family:var(--font-display);}
+  .reflect .reveal{display:none; margin-top:12px; padding-top:12px; border-top:1px dashed var(--rule); font-size:.88rem; color:var(--ink-dim);}
+  .reflect.open .reveal{display:block;}
+
+  /* ---- quiz ---- */
+  .q-block{margin-bottom:18px;}
+  .q-text{font-weight:700; margin-bottom:8px; font-size:.92rem; font-family:var(--font-display);}
+  .q-opts{display:flex; flex-direction:column; gap:6px;}
+  .q-opt{text-align:left; background:var(--surface-2); border:1px solid var(--rule); border-radius:7px; padding:8px 12px; font-size:.85rem; cursor:pointer; color:var(--ink); font-family:var(--font-body);}
+  .q-opt:hover{border-color:var(--accent);}
+  .q-opt.correct{border-color:var(--good); background:color-mix(in srgb, var(--good) 16%, var(--surface-2));}
+  .q-opt.wrong{border-color:var(--bad); background:color-mix(in srgb, var(--bad) 14%, var(--surface-2));}
+  .q-opt[disabled]{cursor:default;}
+  .q-fb{font-size:.78rem; color:var(--ink-dim); margin-top:6px; min-height:1em;}
+  .quiz-result{font-family:var(--font-mono); font-size:.82rem; padding:9px 14px; border-radius:7px; background:var(--surface-3); display:inline-block;}
+
+  /* ---- glossary ---- */
+  .gloss-search{
+    width:100%; font-family:var(--font-body); font-size:.95rem; padding:10px 14px;
+    border:1px solid var(--rule); border-radius:8px; background:var(--surface-2); color:var(--ink); margin-bottom:18px;
+  }
+  .gloss-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  @media (max-width:700px){ .gloss-grid{grid-template-columns:1fr;} }
+  .gloss-item{background:var(--surface-2); border:1px solid var(--rule); border-radius:8px; padding:10px 14px;}
+  .gloss-item dt{font-weight:700; font-size:.86rem; margin-bottom:3px; font-family:var(--font-display);}
+  .gloss-item dd{margin:0; font-size:.82rem; color:var(--ink-dim);}
+  .gloss-empty{color:var(--ink-dim); font-size:.86rem; padding:20px 0; text-align:center;}
+
+  /* ---- ledger table ---- */
+  .table-scroll{overflow-x:auto;}
+  table.ledger{width:100%; border-collapse:collapse; font-size:.84rem;}
+  table.ledger td{padding:6px 8px; border-bottom:1px solid var(--rule);}
+  table.ledger td.num{text-align:right; font-family:var(--font-mono);}
+
+  /* ---- final ---- */
+  .final-wrap{text-align:center; padding:20px 0 10px;}
+  .final-card{
+    background:linear-gradient(135deg, color-mix(in srgb, var(--cat-1) 12%, var(--surface-2)), color-mix(in srgb, var(--cat-4) 12%, var(--surface-2)));
+    border:1px solid var(--rule); border-radius:14px; padding:28px 24px; margin-top:18px;
+  }
+  .final-score{font-family:var(--font-mono); font-size:2.4rem; color:var(--accent); font-weight:700;}
+  .final-message{max-width:56ch; margin:0 auto; text-align:left;}
+  .final-message p{font-size:.98rem;}
+  .final-signoff{font-style:italic; margin-top:16px;}
+  .final-contact{margin-top:20px; font-size:.9rem;}
+  .final-contact a{color:var(--accent); font-weight:700; text-decoration:none;}
+  .final-contact a:hover{text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deckRoot">
+  <aside class="rail" id="rail">
+    <div class="rail-scroll">
+      <div class="rail-brand">
+        <span class="eyebrow">Guia de estudos</span>
+        <h1>Sustentabilidade, Saúde e Segurança no Trabalho</h1>
+      </div>
+      <div id="railModules"></div>
+    </div>
+    <div class="rail-footer">Desenvolvido por: <a href="https://www.instagram.com/prof.arijunior/" target="_blank" rel="noopener">@prof.arijunior</a></div>
+  </aside>
+
+  <div class="main">
+    <div class="stage-wrap" id="stageWrap">
+      <div class="stage" id="stage"></div>
+    </div>
+    <div class="navbar" id="navbar">
+      <button class="iconbtn" id="railToggle" title="Mostrar/ocultar sumário" aria-label="Sumário">☰</button>
+      <span class="crumb" id="crumb"></span>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <span class="count" id="slideCount"></span>
+      <span class="score" id="scoreBadge"></span>
+      <div class="nav-arrows">
+        <button class="iconbtn" id="prevBtn" title="Anterior" aria-label="Slide anterior">←</button>
+        <button class="iconbtn" id="nextBtn" title="Próximo" aria-label="Próximo slide">→</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="corner-controls">
+    <button class="iconbtn" id="themeBtn" title="Tema" aria-label="Alternar tema">◐</button>
+    <button class="iconbtn" id="fullscreenBtn" title="Tela cheia" aria-label="Tela cheia">⛶</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ========================================================= helpers */
+  function el(tag, cls, html){
+    var e = document.createElement(tag);
+    if(cls) e.className = cls;
+    if(html!==undefined) e.innerHTML = html;
+    return e;
+  }
+  function polar(cx,cy,r,angleDeg){
+    var a = angleDeg*Math.PI/180;
+    return {x:cx+r*Math.cos(a), y:cy+r*Math.sin(a)};
+  }
+
+  /* ========================================================= state */
+  var STORE_KEY = "sst_qvt_deck_v1";
+  var state = (function(){
+    try{ var raw = localStorage.getItem(STORE_KEY); if(raw) return JSON.parse(raw); }catch(e){}
+    return {cur:0, visited:{}, answered:{}};
+  })();
+  function save(){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }catch(e){} }
+  if(!state.correctSet) state.correctSet = {};
+
+  /* ========================================================= content builders */
+
+  function stepsList(container, steps){
+    var wrap = el("div","steps");
+    steps.forEach(function(s){
+      var row = el("div","step");
+      row.innerHTML = "<span class='sn'></span><div class='st'><h4>"+s.t+"</h4><p>"+s.d+"</p></div>";
+      wrap.appendChild(row);
+    });
+    container.appendChild(wrap);
+  }
+
+  function bars(container, rows, maxAbs){
+    var wrap = el("div","bars");
+    var mx = maxAbs || Math.max.apply(null, rows.map(function(r){return Math.abs(r.value);}));
+    rows.forEach(function(r){
+      var pct = Math.max(2, Math.round(100*Math.abs(r.value)/mx));
+      var cls = r.total ? "total" : (r.value<0 ? "neg":"pos");
+      var row = el("div","bar-row"+(r.total?" total":""));
+      row.innerHTML = "<span class='lbl'>"+r.label+"</span>"+
+        "<span class='bar-track'><span class='bar-fill "+cls+"' style='width:"+pct+"%;'></span></span>"+
+        "<span class='val mono'>"+r.value.toLocaleString("pt-BR")+(r.suffix||"")+"</span>";
+      wrap.appendChild(row);
+    });
+    container.appendChild(wrap);
+  }
+
+  function pyramid(container, layers){
+    var outer = el("div","pyramid-wrap");
+    var wrap = el("div","pyramid");
+    outer.appendChild(wrap);
+    layers.forEach(function(l,i){
+      var w = 100 - i*14;
+      var d = el("div","pyr-layer", l.t);
+      d.style.width = w+"%";
+      d.style.background = l.c;
+      wrap.appendChild(d);
+    });
+    container.appendChild(outer);
+  }
+
+  function seqFlow(container, steps){
+    var wrap = el("div","seq-flow");
+    var CAT = ["var(--cat-1)","var(--cat-2)","var(--cat-3)","var(--cat-4)","var(--cat-5)"];
+    steps.forEach(function(s,i){
+      var box = el("div","seq-box", s);
+      box.style.borderLeftColor = CAT[i%CAT.length];
+      wrap.appendChild(box);
+      if(i<steps.length-1) wrap.appendChild(el("span","seq-arrow","→"));
+    });
+    container.appendChild(wrap);
+  }
+
+  function treeNode(container, code, label, children, level){
+    var node = el("div","tree-node"+(level===0?" l0":""));
+    node.appendChild(el("div","tree-label"+(level===0?" l0":""), (code?"<span class='code'>"+code+"</span>":"")+label));
+    if(children){ children.forEach(function(c){ treeNode(node, c.code, c.label, c.children, level+1); }); }
+    container.appendChild(node);
+  }
+
+  function flipGrid(container, items){
+    var grid = el("div","flip-grid");
+    items.forEach(function(s){
+      var card = el("div","flip-card");
+      card.innerHTML = '<div class="flip-inner">'+
+        '<div class="flip-face flip-front"><span class="eyebrow">'+(s.kicker||"Sigla")+'</span><h4>'+s.t+'</h4><span class="tap">toque para ver a definição</span></div>'+
+        '<div class="flip-face flip-back">'+s.d+'</div></div>';
+      card.addEventListener("click", function(){ card.classList.toggle("flipped"); });
+      grid.appendChild(card);
+    });
+    container.appendChild(grid);
+  }
+
+  function radialDiagram(container, nodes, centerLabel, opts){
+    opts = opts || {};
+    var CAT = ["var(--cat-1)","var(--cat-2)","var(--cat-3)","var(--cat-4)","var(--cat-5)"];
+    var cx=140, cy=140, R=112;
+    var iwrap = el("div","interfaces-wrap");
+    var radial = el("div","radial");
+
+    var spokesSvg = document.createElementNS("http://www.w3.org/2000/svg","svg");
+    spokesSvg.setAttribute("class","radial-spokes");
+    spokesSvg.setAttribute("viewBox","0 0 280 280");
+    var spokeLines = [];
+    nodes.forEach(function(n){
+      var pos = polar(cx,cy,R,n.angle-90);
+      var line = document.createElementNS("http://www.w3.org/2000/svg","line");
+      line.setAttribute("x1",cx); line.setAttribute("y1",cy);
+      line.setAttribute("x2",pos.x); line.setAttribute("y2",pos.y);
+      line.setAttribute("stroke","var(--rule)"); line.setAttribute("stroke-width","2");
+      line.setAttribute("stroke-dasharray","3 5");
+      spokesSvg.appendChild(line);
+      spokeLines.push(line);
+    });
+    radial.appendChild(spokesSvg);
+    radial.appendChild(el("div","hub",centerLabel));
+
+    var desc = el("div","interfaces-desc","<span class='eyebrow'>Selecione uma área</span><p style='margin:0;'>Toque em um dos círculos ao redor para ver a relação.</p>");
+    var progress = el("div","interfaces-progress","0 / "+nodes.length+" áreas exploradas");
+    var reflectHolder = el("div","");
+    var visited = {};
+
+    nodes.forEach(function(n,i){
+      var pos = polar(cx,cy,R,n.angle-90);
+      var col = CAT[i%CAT.length];
+      var node = el("div","node", "<span>"+n.label+"</span><span class='check' style='background:"+col+";'>✓</span>");
+      node.style.top = pos.y+"px"; node.style.left = pos.x+"px";
+      node.addEventListener("click", function(){
+        Array.prototype.forEach.call(radial.querySelectorAll(".node"), function(x){x.classList.remove("sel");});
+        node.classList.add("sel","visited");
+        node.style.borderColor = col;
+        spokeLines[i].setAttribute("stroke", col);
+        spokeLines[i].setAttribute("stroke-dasharray","0");
+        visited[i] = true;
+        desc.innerHTML = "<span class='eyebrow' style='color:"+col+";'>"+n.label+"</span><p style='margin:0;'>"+n.text+"</p>";
+        var nv = Object.keys(visited).length;
+        progress.textContent = nv+" / "+nodes.length+" áreas exploradas";
+        if(opts.completionText && nv===nodes.length && !reflectHolder.getAttribute("data-shown")){
+          reflectHolder.setAttribute("data-shown","1");
+          reflectHolder.innerHTML = "<div class='reflect' style='margin-top:18px;'><span class='eyebrow'>Ciclo completo — para refletir</span><p class='question' style='margin-top:8px;'>"+opts.completionText+"</p></div>";
+        }
+      });
+      radial.appendChild(node);
+    });
+
+    iwrap.appendChild(radial);
+    var descCol = el("div","");
+    descCol.appendChild(desc); descCol.appendChild(progress);
+    iwrap.appendChild(descCol);
+    container.appendChild(iwrap);
+    container.appendChild(reflectHolder);
+  }
+
+  function docMock(container, kicker, title, rows, foot){
+    var wrap = el("div","doc-mock");
+    var head = el("div","dm-head","<span class='eyebrow'>"+kicker+"</span><h4>"+title+"</h4>");
+    wrap.appendChild(head);
+    var body = el("div","dm-body");
+    var table = document.createElement("table");
+    var html = "";
+    rows.forEach(function(r){
+      html += "<tr"+(r.total?" class='total'":"")+"><td>"+r.label+"</td><td class='num'>"+r.value+"</td></tr>";
+    });
+    table.innerHTML = html;
+    body.appendChild(table);
+    if(foot){ body.appendChild(el("p","note", foot)); }
+    wrap.appendChild(body);
+    container.appendChild(wrap);
+  }
+
+  /* ---- interactive risk matrix (probabilidade x severidade) ---- */
+  function riskMatrix(container, opts){
+    var PROB = ["Rara","Improvável","Possível","Provável","Quase certa"];
+    var SEV = ["Catastrófica","Grave","Moderada","Leve"]; // top row = mais grave
+    var wrap = el("div","riskmatrix-wrap");
+    var gridOuter = el("div","");
+    var grid = el("div","riskmatrix");
+    gridOuter.appendChild(grid);
+    gridOuter.appendChild(el("div","rm-axis-x","Probabilidade de ocorrência →"));
+    var desc = el("div","rm-desc","<span class='eyebrow'>Selecione uma célula</span><p style='margin-top:6px;'>Toque em qualquer cruzamento de probabilidade × severidade para ver um risco real de exemplo e a resposta esperada da empresa.</p>");
+
+    grid.appendChild(el("div","rm-head",""));
+    PROB.forEach(function(p){ grid.appendChild(el("div","rm-head", p)); });
+
+    function colorFor(score){
+      if(score>=16) return "var(--bad)";
+      if(score>=10) return "var(--warn)";
+      if(score>=5) return "color-mix(in srgb, var(--warn) 55%, var(--good))";
+      return "var(--good)";
+    }
+
+    SEV.forEach(function(sevLabel, si){
+      grid.appendChild(el("div","rm-rowlabel", sevLabel));
+      PROB.forEach(function(probLabel, pi){
+        var sevWeight = SEV.length - si; // catastrófica=4 ... leve=1
+        var probWeight = pi+1; // rara=1 ... quase certa=5
+        var score = sevWeight*probWeight;
+        var cell = el("button","rm-cell", score);
+        cell.type = "button";
+        cell.style.background = colorFor(score);
+        cell.title = sevLabel+" × "+probLabel;
+        cell.addEventListener("click", function(){
+          Array.prototype.forEach.call(grid.querySelectorAll(".rm-cell"), function(c){ c.classList.remove("sel"); });
+          cell.classList.add("sel");
+          var example = (opts.examples && opts.examples[si+"_"+pi]) ||
+            {risco:"Combinação "+sevLabel.toLowerCase()+" × "+probLabel.toLowerCase()+".", resposta:"Quanto mais alto o cruzamento, maior a prioridade de ação imediata e de investimento em controles coletivos."};
+          desc.innerHTML = "<span class='eyebrow'>"+sevLabel+" × "+probLabel+" — pontuação "+score+"</span>"+
+            "<p style='margin-top:6px;'><strong>Exemplo de risco:</strong> "+example.risco+"</p>"+
+            "<p style='margin-bottom:0;'><strong>Resposta esperada:</strong> "+example.resposta+"</p>";
+        });
+        grid.appendChild(cell);
+      });
+    });
+
+    var legend = el("div","rm-legend",
+      "<span><i style='background:var(--good);'></i>Risco baixo — monitorar</span>"+
+      "<span><i style='background:color-mix(in srgb, var(--warn) 55%, var(--good));'></i>Moderado — planejar ação</span>"+
+      "<span><i style='background:var(--warn);'></i>Alto — agir em prazo definido</span>"+
+      "<span><i style='background:var(--bad);'></i>Crítico — ação imediata</span>");
+    gridOuter.appendChild(legend);
+
+    wrap.appendChild(gridOuter);
+    wrap.appendChild(desc);
+    container.appendChild(wrap);
+  }
+
+  function sampleFromBank(bank, n){
+    var pool = bank.map(function(p){return p;});
+    for(var i=pool.length-1;i>0;i--){
+      var j = Math.floor(Math.random()*(i+1));
+      var t = pool[i]; pool[i]=pool[j]; pool[j]=t;
+    }
+    return pool.slice(0,n);
+  }
+
+  function connectGame(container, bank, n){
+    var wrap = el("div","connect-wrap");
+    var svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
+    svg.setAttribute("class","connect-svg");
+    var inner = el("div","connect-cols");
+    var colL = el("div","connect-col");
+    var colR = el("div","connect-col");
+    inner.appendChild(colL); inner.appendChild(colR);
+    wrap.appendChild(svg); wrap.appendChild(inner);
+    container.appendChild(wrap);
+
+    var footer = el("div","connect-footer");
+    var status = el("div","connect-status","");
+    var reloadBtn = el("button","btn ghost small","🔀 Carregar novas situações");
+    reloadBtn.type="button";
+    footer.appendChild(status); footer.appendChild(reloadBtn);
+    container.appendChild(footer);
+
+    var selected = null, solvedCount = 0, pairs = [];
+
+    function dotCenter(dot){
+      var dr = dot.getBoundingClientRect(), wr = wrap.getBoundingClientRect();
+      return {x: dr.left+dr.width/2-wr.left, y: dr.top+dr.height/2-wr.top};
+    }
+    function drawLine(leftDot, rightDot){
+      var a = dotCenter(leftDot), b = dotCenter(rightDot);
+      var line = document.createElementNS("http://www.w3.org/2000/svg","line");
+      line.setAttribute("x1",a.x); line.setAttribute("y1",a.y);
+      line.setAttribute("x2",b.x); line.setAttribute("y2",b.y);
+      line.setAttribute("stroke","var(--good)"); line.setAttribute("stroke-width","2.5"); line.setAttribute("stroke-linecap","round");
+      line.setAttribute("data-l", leftDot.getAttribute("data-id"));
+      svg.appendChild(line);
+    }
+    function redrawLines(){
+      Array.prototype.forEach.call(svg.querySelectorAll("line"), function(line){
+        var id = line.getAttribute("data-l");
+        var leftDot = colL.querySelector(".cc-dot[data-id='"+id+"']");
+        var rightDot = colR.querySelector(".cc-dot[data-id='"+id+"']");
+        if(!leftDot||!rightDot) return;
+        var a = dotCenter(leftDot), b = dotCenter(rightDot);
+        line.setAttribute("x1",a.x); line.setAttribute("y1",a.y);
+        line.setAttribute("x2",b.x); line.setAttribute("y2",b.y);
+      });
+    }
+    window.addEventListener("resize", function(){ if(document.body.contains(wrap)) redrawLines(); });
+
+    function onDotClick(dot){
+      if(dot.classList.contains("done")) return;
+      var side = dot.getAttribute("data-side");
+      if(!selected){
+        if(side==="l"){ selected = dot; dot.classList.add("sel"); }
+        return;
+      }
+      if(selected===dot) return;
+      var selSide = selected.getAttribute("data-side");
+      if(selSide===side){
+        selected.classList.remove("sel");
+        selected = (side==="l") ? dot : null;
+        if(selected) selected.classList.add("sel");
+        return;
+      }
+      var leftDot = selSide==="l" ? selected : dot;
+      var rightDot = selSide==="l" ? dot : selected;
+      if(leftDot.getAttribute("data-id")===rightDot.getAttribute("data-id")){
+        leftDot.classList.remove("sel"); leftDot.classList.add("done");
+        rightDot.classList.add("done");
+        drawLine(leftDot, rightDot);
+        solvedCount++;
+        status.textContent = solvedCount+" / "+n+" conectados"+(solvedCount===n?" — concluído!":"");
+        selected = null;
+      } else {
+        dot.classList.add("wrong");
+        setTimeout(function(){ dot.classList.remove("wrong"); }, 300);
+        selected.classList.remove("sel");
+        selected = null;
+      }
+    }
+
+    function build(){
+      pairs = sampleFromBank(bank, n);
+      var shuffledRight = pairs.map(function(p){return p;}).sort(function(){return Math.random()-0.5;});
+      colL.innerHTML = ""; colR.innerHTML = ""; svg.innerHTML = "";
+      selected = null; solvedCount = 0;
+      status.textContent = "0 / "+n+" conectados";
+      pairs.forEach(function(p){
+        var card = el("div","connect-card left", "<span class='cc-text'>"+p.lanc+"</span><span class='cc-dot' data-side='l' data-id='"+p.id+"'></span>");
+        colL.appendChild(card);
+      });
+      shuffledRight.forEach(function(p){
+        var card = el("div","connect-card right", "<span class='cc-dot' data-side='r' data-id='"+p.id+"'></span><span class='cc-text'>"+p.conta+"</span>");
+        colR.appendChild(card);
+      });
+      Array.prototype.forEach.call(wrap.querySelectorAll(".cc-dot"), function(dot){
+        dot.addEventListener("click", function(){ onDotClick(dot); });
+      });
+    }
+    reloadBtn.addEventListener("click", build);
+    build();
+  }
+
+  function calcResult(container, items){
+    var wrap = el("div","calc-result");
+    items.forEach(function(it){
+      wrap.appendChild(el("div","cr-item","<span class='cr-label'>"+it.label+"</span><span class='cr-value mono'>"+it.value+"</span>"));
+    });
+    container.innerHTML = "";
+    container.appendChild(wrap);
+  }
+
+  function calcCard(container, title, fieldDefs, computeFn){
+    var card = el("div","card calc-card");
+    card.appendChild(el("h4","", title));
+    var form = el("div","calc-form mini");
+    fieldDefs.forEach(function(f){
+      var lab = el("label","", f.label);
+      var inp;
+      if(f.type==="select"){
+        inp = document.createElement("select");
+        f.options.forEach(function(o){
+          var opt = document.createElement("option");
+          opt.value = o.v; opt.textContent = o.label;
+          inp.appendChild(opt);
+        });
+        inp.value = f.v;
+      } else {
+        inp = document.createElement("input");
+        inp.type="number"; inp.value=f.v;
+      }
+      inp.className="mini-input"; inp.setAttribute("data-k", f.k);
+      inp.addEventListener("input", recompute);
+      inp.addEventListener("change", recompute);
+      lab.appendChild(inp);
+      form.appendChild(lab);
+    });
+    card.appendChild(form);
+    var resultBox = el("div","");
+    card.appendChild(resultBox);
+    function recompute(){
+      var v = {};
+      Array.prototype.forEach.call(form.querySelectorAll(".mini-input"), function(inp){
+        var raw = inp.tagName==="SELECT" ? inp.value : parseFloat(inp.value);
+        v[inp.getAttribute("data-k")] = (typeof raw==="number" && isNaN(raw)) ? 0 : raw;
+      });
+      calcResult(resultBox, computeFn(v));
+    }
+    recompute();
+    container.appendChild(card);
+  }
+
+  function reflectionBlock(container, scenarios){
+    scenarios.forEach(function(sc, i){
+      var box = el("div","reflect");
+      if(i>0) box.style.marginTop = "16px";
+      box.innerHTML = "<span class='eyebrow'>Cenário "+(i+1)+" de "+scenarios.length+"</span>"+
+        "<p class='scenario'>"+sc.scenario+"</p>"+
+        "<p class='question'>"+sc.question+"</p>";
+      var btn = el("button","btn ghost small","Ver uma leitura possível");
+      btn.type = "button";
+      var reveal = el("div","reveal","<span class='eyebrow'>Uma leitura possível</span><p style='margin-top:4px;'>"+sc.analysis+"</p>");
+      btn.addEventListener("click", function(){
+        box.classList.toggle("open");
+        btn.textContent = box.classList.contains("open") ? "Ocultar leitura sugerida" : "Ver uma leitura possível";
+      });
+      box.appendChild(btn);
+      box.appendChild(reveal);
+      container.appendChild(box);
+    });
+  }
+
+  function quizBlock(container, moduleId, questions){
+    var resultEl = el("div","quiz-result","0 / "+questions.length+" corretas");
+    questions.forEach(function(q, qi){
+      var qid = moduleId+"_"+qi;
+      var block = el("div","q-block");
+      block.appendChild(el("div","q-text", (qi+1)+". "+q.q));
+      var opts = el("div","q-opts");
+      var fb = el("div","q-fb");
+      q.opts.forEach(function(optText, oi){
+        var b = el("button","q-opt", optText);
+        b.type="button";
+        if(state.answered[qid]!==undefined){
+          b.disabled = true;
+          if(oi===q.a) b.classList.add("correct");
+          if(oi===state.answered[qid] && oi!==q.a) b.classList.add("wrong");
+        }
+        b.addEventListener("click", function(){
+          if(state.answered[qid]!==undefined) return;
+          state.answered[qid]=oi;
+          if(!state.correctSet) state.correctSet = {};
+          if(oi===q.a) state.correctSet[qid]=true;
+          save();
+          Array.prototype.forEach.call(opts.children, function(x,xi){ x.disabled=true; if(xi===q.a) x.classList.add("correct"); });
+          if(oi===q.a){ b.classList.add("correct"); fb.textContent="Correto."; }
+          else { b.classList.add("wrong"); fb.textContent="Resposta correta destacada."; }
+          updateResult(); updateScoreBadge();
+        });
+        opts.appendChild(b);
+      });
+      block.appendChild(opts); block.appendChild(fb);
+      container.appendChild(block);
+    });
+    function updateResult(){
+      var c=0;
+      questions.forEach(function(q,qi){ var qid=moduleId+"_"+qi; if(state.answered[qid]===q.a) c++; });
+      resultEl.textContent = c+" / "+questions.length+" corretas";
+    }
+    updateResult();
+    container.appendChild(resultEl);
+  }
+
+  var GLOSSARY = [
+    {t:"Sustentabilidade", d:"Capacidade de atender às necessidades do presente sem comprometer a capacidade das gerações futuras de atender às suas próprias necessidades (Relatório Brundtland, 1987)."},
+    {t:"Responsabilidade socioambiental (RSE)", d:"Compromisso voluntário da empresa em agir de forma ética em relação à sociedade e ao meio ambiente, indo além das exigências legais."},
+    {t:"Tripé da sustentabilidade (Triple Bottom Line)", d:"Modelo de Elkington (1994) que avalia a empresa em três dimensões: ambiental (Planeta), social (Pessoas) e econômica (Lucro)."},
+    {t:"ESG", d:"Sigla em inglês para Environmental, Social and Governance — critérios ambientais, sociais e de governança usados para avaliar a sustentabilidade de uma organização."},
+    {t:"ODS", d:"Objetivos de Desenvolvimento Sustentável — os 17 objetivos globais da ONU (Agenda 2030) que orientam metas de sustentabilidade corporativa."},
+    {t:"Promoção da saúde", d:"Conforme a Carta de Ottawa (OMS, 1986), processo de capacitar as pessoas a aumentar o controle sobre sua saúde e a melhorá-la, agindo sobre determinantes amplos — não apenas sobre doenças específicas."},
+    {t:"Prevenção de doenças", d:"Ações focadas em reduzir fatores de risco de doenças específicas — complementar, mas distinto, da promoção da saúde, que é mais ampla."},
+    {t:"Qualidade de Vida no Trabalho (QVT)", d:"Conjunto de ações de uma empresa que envolvem a implantação de melhorias e inovações gerenciais, tecnológicas e estruturais no ambiente de trabalho, visando o bem-estar dos colaboradores."},
+    {t:"Modelo de Walton", d:"Modelo de 1973 que avalia a QVT em oito categorias, como compensação justa, condições de segurança, uso e desenvolvimento de capacidades e relevância social do trabalho."},
+    {t:"Endomarketing", d:"Marketing interno (Saul Bekin, 1995) — conjunto de ações de comunicação e engajamento voltadas ao público interno (colaboradores), para alinhar cultura e fortalecer o comprometimento antes de comunicar para fora."},
+    {t:"Clima organizacional", d:"Percepção coletiva dos colaboradores sobre o ambiente de trabalho, políticas e relações internas, frequentemente medida por pesquisas internas."},
+    {t:"CLT", d:"Consolidação das Leis do Trabalho — principal norma trabalhista brasileira, cujo Capítulo V trata de Segurança e Medicina do Trabalho."},
+    {t:"Norma Regulamentadora (NR)", d:"Normas emitidas pelo Ministério do Trabalho e Emprego que detalham obrigações de segurança e saúde no trabalho previstas na CLT."},
+    {t:"PGR", d:"Programa de Gerenciamento de Riscos (NR-1) — documento que substituiu o PPRA, reunindo o Inventário de Riscos e o Plano de Ação da empresa."},
+    {t:"PCMSO", d:"Programa de Controle Médico de Saúde Ocupacional (NR-7) — define exames médicos obrigatórios (admissional, periódico, de retorno, de mudança de função e demissional)."},
+    {t:"ASO", d:"Atestado de Saúde Ocupacional — documento emitido após os exames do PCMSO, que declara o trabalhador apto ou inapto para a função."},
+    {t:"Ergonomia (NR-17)", d:"Norma que trata da adaptação das condições de trabalho às características do trabalhador, reduzindo esforços e riscos posturais."},
+    {t:"Trabalho em altura (NR-35)", d:"Norma aplicável a todo trabalho executado acima de 2 metros do nível inferior, com risco de queda."},
+    {t:"Segurança em eletricidade (NR-10)", d:"Norma que estabelece requisitos para garantir a segurança em instalações e serviços com eletricidade."},
+    {t:"Sinalização de segurança (NR-26)", d:"Norma que define cores e sinalizações para identificar e alertar sobre riscos nos ambientes de trabalho."},
+    {t:"EPI", d:"Equipamento de Proteção Individual (NR-6) — dispositivo de uso individual destinado a proteger o trabalhador contra riscos à sua saúde ou segurança."},
+    {t:"EPC", d:"Equipamento de Proteção Coletiva — medida que protege todos os trabalhadores expostos a um risco (ex.: guarda-corpo, exaustão, enclausuramento), com prioridade sobre o EPI na hierarquia de controle."},
+    {t:"Hierarquia de controle de riscos", d:"Ordem de prioridade das medidas de segurança: eliminar o risco, substituí-lo, controlá-lo coletivamente (EPC), depois administrativamente, e só por último proteger individualmente (EPI)."},
+    {t:"Risco ocupacional", d:"Probabilidade de um trabalhador sofrer dano à saúde em razão da exposição a um agente ou condição presente no ambiente ou na organização do trabalho."},
+    {t:"Mapa de risco", d:"Representação gráfica de um conjunto de fatores de risco presentes nos locais de trabalho, elaborado pela CIPA, usando cores padronizadas por tipo de risco."},
+    {t:"APR", d:"Análise Preliminar de Risco — método que identifica, antes do início de uma atividade, os perigos envolvidos e as medidas de controle necessárias."},
+    {t:"SESMT", d:"Serviço Especializado em Engenharia de Segurança e em Medicina do Trabalho (NR-4) — equipe técnica interna responsável por antecipar, reconhecer, avaliar e controlar riscos ocupacionais."},
+    {t:"CIPA", d:"Comissão Interna de Prevenção de Acidentes e Assédio (NR-5) — comissão paritária de empregados e empregador voltada à prevenção de acidentes e doenças no trabalho."},
+    {t:"Comissão paritária", d:"Composição com igual número de representantes de dois grupos — na CIPA, metade eleita pelos empregados e metade indicada pelo empregador."},
+    {t:"Estabilidade do cipeiro", d:"Garantia de emprego do representante dos empregados na CIPA, do registro da candidatura até um ano após o fim do mandato."},
+    {t:"CAT", d:"Comunicação de Acidente de Trabalho — documento que formaliza, junto ao INSS, a ocorrência de um acidente de trabalho ou doença ocupacional."},
+    {t:"Acidente de trabalho típico", d:"Acidente que ocorre pelo exercício do trabalho a serviço da empresa, provocando lesão corporal, perturbação funcional ou morte."},
+    {t:"Acidente de trajeto", d:"Acidente ocorrido no percurso entre a residência e o local de trabalho (ou vice-versa), equiparado por lei a acidente de trabalho."},
+    {t:"Doença ocupacional", d:"Doença causada ou desencadeada pelas condições do trabalho ou pela exposição a um agente nocivo específico da atividade exercida."},
+    {t:"eSocial (evento S-2210)", d:"Sistema do governo pelo qual, desde 2023, a Comunicação de Acidente de Trabalho também pode ser transmitida eletronicamente."},
+    {t:"Grau de risco", d:"Classificação (de 1 a 4) atribuída a cada atividade econômica (CNAE), usada para dimensionar exigências como o SESMT e a CIPA — quanto maior o grau, maior o risco presumido da atividade."}
+  ].sort(function(a,b){ return a.t.localeCompare(b.t,'pt-BR'); });
+
+  function glossaryBlock(container){
+    var input = document.createElement("input");
+    input.type = "search"; input.className = "gloss-search"; input.placeholder = "Buscar termo...";
+    container.appendChild(input);
+    var grid = el("div","gloss-grid");
+    var empty = el("div","gloss-empty","Nenhum termo encontrado.");
+    empty.style.display = "none";
+    container.appendChild(grid);
+    container.appendChild(empty);
+    function renderList(filter){
+      grid.innerHTML = "";
+      var f = (filter||"").toLowerCase();
+      var any = false;
+      GLOSSARY.forEach(function(g){
+        if(f && g.t.toLowerCase().indexOf(f)===-1 && g.d.toLowerCase().indexOf(f)===-1) return;
+        any = true;
+        grid.appendChild(el("dl","gloss-item","<dt>"+g.t+"</dt><dd>"+g.d+"</dd>"));
+      });
+      empty.style.display = any ? "none" : "block";
+    }
+    input.addEventListener("input", function(){ renderList(input.value); });
+    renderList("");
+  }
+
+  /* ========================================================= SLIDES DEFINITION */
+  var MODULES = [
+    {id:"inicio", name:"Bem-vindo"},
+    {id:"sustent", name:"Sustentabilidade Socioambiental"},
+    {id:"saude", name:"Promoção da Saúde"},
+    {id:"qvt", name:"Qualidade de Vida no Trabalho"},
+    {id:"endo", name:"Endomarketing"},
+    {id:"legis", name:"Legislação de SST"},
+    {id:"riscos", name:"Riscos Ocupacionais"},
+    {id:"sesmt", name:"SESMT"},
+    {id:"cipa", name:"CIPA"},
+    {id:"cat", name:"Comunicação de Acidente (CAT)"},
+    {id:"gloss", name:"Glossário"},
+    {id:"fin", name:"Síntese"}
+  ];
+
+  var SLIDES = [];
+  function addSlide(mod, title, build){ SLIDES.push({mod:mod, title:title, build:build}); }
+
+  /* ---------- BEM-VINDO ---------- */
+  addSlide("inicio","Mensagem inicial", function(c){
+    var wrap = el("div","welcome");
+    wrap.innerHTML =
+      "<span class='eyebrow'>Guia de Estudos · Sustentabilidade, Saúde, Segurança e Qualidade de Vida no Trabalho</span>"+
+      "<h2>Olá, seja bem-vindo(a)!</h2>"+
+      "<p>Esse portal foi criado para apoiar seus estudos sobre sustentabilidade e responsabilidade socioambiental, promoção da saúde, qualidade de vida no trabalho, endomarketing, legislação de segurança e saúde ocupacional, riscos, SESMT, CIPA e Comunicação de Acidente de Trabalho — em um formato interativo e visual, com gráficos, calculadoras e cenários para reflexão.</p>"+
+      "<p>Espero que gostem. Qualquer dúvida ou sugestão, podem contatar o <a href='https://www.instagram.com/prof.arijunior/' target='_blank' rel='noopener'>@prof.arijunior</a>.</p>"+
+      "<p class='sign'>Bons estudos!<br><strong>Ari Ferreira Júnior</strong></p>";
+    var btn = el("button","btn","Começar →");
+    btn.addEventListener("click", function(){
+      var target = SLIDES.findIndex(function(sl){ return sl.mod==="sustent"; });
+      goTo(target<0?1:target);
+    });
+    wrap.appendChild(btn);
+    c.appendChild(wrap);
+  });
+
+  /* ========================================================= MÓDULO: SUSTENTABILIDADE E RESPONSABILIDADE SOCIOAMBIENTAL */
+  addSlide("sustent","Conceito e objetivos", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","Sustentabilidade Socioambiental · 1 de 3"));
+    c.appendChild(el("h2","","O que é sustentabilidade e responsabilidade socioambiental"));
+    c.appendChild(el("p","lede","Ir além do lucro: equilibrar resultado econômico, impacto social e cuidado ambiental nas decisões da empresa."));
+    var b = el("div","block");
+    b.innerHTML = "<p><strong>Sustentabilidade</strong> é a capacidade de atender às necessidades do presente sem comprometer a capacidade das gerações futuras de atenderem às suas próprias necessidades (Relatório Brundtland, ONU, 1987).</p>"+
+      "<p>Quando essa ideia é aplicada à gestão de uma empresa, ela se transforma em <strong>responsabilidade socioambiental (RSE)</strong>: o compromisso voluntário de agir de forma ética com a sociedade e o meio ambiente, indo além do que a lei exige.</p>";
+    c.appendChild(b);
+    var b2 = el("div","block");
+    b2.innerHTML = "<h3>O tripé da sustentabilidade (Triple Bottom Line)</h3><p>Proposto por John Elkington (1994), avalia toda decisão de negócio sob três dimensões que precisam estar em equilíbrio:</p>";
+    c.appendChild(b2);
+    pyramid(c, [
+      {t:"Econômico (Profit) — geração de resultado e viabilidade do negócio", c:"var(--cat-3)"},
+      {t:"Social (People) — impacto em colaboradores, comunidade e cadeia de valor", c:"var(--cat-2)"},
+      {t:"Ambiental (Planet) — uso responsável de recursos naturais e redução de impactos", c:"var(--cat-1)"}
+    ]);
+    var b3 = el("div","block"); b3.style.marginTop="26px";
+    b3.innerHTML = "<h3>Objetivos centrais</h3>";
+    c.appendChild(b3);
+    var grid = el("div","grid-3");
+    grid.appendChild(el("div","card","<h4>Reduzir impactos</h4><p>Diminuir o consumo de recursos naturais e a geração de resíduos, poluição e emissões.</p>"));
+    grid.appendChild(el("div","card","<h4>Gerar valor social</h4><p>Promover inclusão, diversidade, educação e desenvolvimento das comunidades em que a empresa atua.</p>"));
+    grid.appendChild(el("div","card","<h4>Assegurar governança</h4><p>Garantir ética, transparência e prestação de contas nas decisões — a base dos critérios ESG.</p>"));
+    c.appendChild(grid);
+    var ex = el("div","example");
+    ex.innerHTML = "<span class='eyebrow'>Para fixar</span><p style='margin:0;'>Os <strong>ODS da ONU</strong> (17 Objetivos de Desenvolvimento Sustentável, Agenda 2030) são hoje a principal referência usada por empresas para alinhar seus projetos socioambientais a metas globais.</p>";
+    c.appendChild(ex);
+  });
+
+  addSlide("sustent","Tipos de projetos de responsabilidade socioambiental", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","Sustentabilidade Socioambiental · 2 de 3"));
+    c.appendChild(el("h2","","Como a responsabilidade socioambiental aparece na prática"));
+    c.appendChild(el("p","lede","Explore cada frente de atuação para ver exemplos concretos de projetos que as empresas costumam desenvolver."));
+    radialDiagram(c, [
+      {angle:0,  label:"Ambiental", text:"Programas de ecoeficiência, redução de consumo de água e energia, gestão de resíduos, logística reversa e certificações como a ISO 14001."},
+      {angle:72, label:"Social interno", text:"Diversidade e inclusão, equidade salarial, educação corporativa, apoio à parentalidade e acessibilidade."},
+      {angle:144, label:"Social externo", text:"Voluntariado corporativo, parcerias com ONGs, programas de educação comunitária e geração de renda local."},
+      {angle:216, label:"Cadeia de valor", text:"Exigência de práticas responsáveis de fornecedores, combate ao trabalho análogo à escravidão e compras sustentáveis."},
+      {angle:288, label:"Governança", text:"Códigos de ética, canais de denúncia, transparência de relatórios e metas públicas de ESG."}
+    ], "Tipos de<br>projetos<br>de RSE", {completionText:"Reflita: entre essas cinco frentes, qual você já viu (ou gostaria de ver) sendo aplicada em uma empresa real? Projetos de RSE tendem a ser mais sólidos quando combinam mais de uma frente ao mesmo tempo."});
+  });
+
+  addSlide("sustent","Cenário para reflexão", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","Sustentabilidade Socioambiental · 3 de 3"));
+    c.appendChild(el("h2","","Sustentabilidade de verdade ou greenwashing?"));
+    c.appendChild(el("p","lede","Nem todo projeto anunciado como \"sustentável\" tem substância. Analise as situações a seguir."));
+    reflectionBlock(c, [
+      {
+        scenario:"Uma fábrica de embalagens lança uma campanha publicitária destacando que 2% de sua linha de produtos agora usa plástico reciclado, enquanto os outros 98% seguem inalterados e nenhuma meta de ampliação é divulgada.",
+        question:"Esse é um exemplo sólido de responsabilidade socioambiental ou de \"greenwashing\" (maquiagem verde)?",
+        analysis:"Tende a ser lido como greenwashing: a ação é pontual, não vem acompanhada de metas progressivas nem de transparência sobre o restante da produção. RSE consistente normalmente aparece como política contínua, com indicadores e metas públicas — não como um único anúncio isolado."
+      },
+      {
+        scenario:"Uma rede de varejo decide reduzir o volume de contratos com fornecedores que não comprovam conformidade trabalhista, mesmo que isso signifique pagar um pouco mais caro, e publica anualmente quantos fornecedores foram reprovados nessa auditoria.",
+        question:"Em qual dimensão do tripé da sustentabilidade esse projeto se encaixa, e por que ele tende a ser mais duradouro?",
+        analysis:"Encaixa-se principalmente na dimensão social (cadeia de valor) com reflexos em governança (transparência dos resultados). Tende a ser mais duradouro porque está integrado a um processo de decisão (critério de compra) e não a uma ação isolada de marketing — é política, não campanha."
+      }
+    ]);
+    var qc = el("div","block"); qc.style.marginTop="26px";
+    qc.appendChild(el("h3","","Verifique o que você reteve"));
+    c.appendChild(qc);
+    quizBlock(c, "sustent", [
+      {q:"O tripé da sustentabilidade (Triple Bottom Line) é formado por quais três dimensões?", opts:["Marketing, Vendas e Operações","Econômica, Social e Ambiental","Local, Nacional e Internacional","Curto, médio e longo prazo"], a:1},
+      {q:"O que caracteriza o \"greenwashing\"?", opts:["Um projeto ambiental de longo prazo com metas públicas","Comunicação que exagera ou finge compromisso socioambiental sem prática consistente por trás","Um relatório de sustentabilidade auditado externamente","A certificação ISO 14001"], a:1}
+    ]);
+  });
+
+  /* ========================================================= MÓDULO: PROMOÇÃO DA SAÚDE */
+  addSlide("saude","Conceito de promoção da saúde", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","Promoção da Saúde · 1 de 2"));
+    c.appendChild(el("h2","","Promover saúde é mais do que prevenir doença"));
+    c.appendChild(el("p","lede","A Organização Mundial da Saúde separa dois conceitos que, na prática das empresas, costumam ser confundidos."));
+    var grid = el("div","grid-2");
+    grid.appendChild(el("div","card","<h4>Promoção da saúde</h4><p>Processo de capacitar as pessoas a aumentar o controle sobre sua própria saúde e a melhorá-la (Carta de Ottawa, OMS, 1986). Atua sobre determinantes amplos: ambiente, qualidade de vida, hábitos, relações de trabalho.</p>"));
+    grid.appendChild(el("div","card","<h4>Prevenção de doenças</h4><p>Conjunto de ações focadas em reduzir fatores de risco de uma doença específica — como vacinação ou exames periódicos direcionados a um risco conhecido.</p>"));
+    c.appendChild(grid);
+    var b = el("div","block"); b.style.marginTop="22px";
+    b.innerHTML = "<p>Na prática corporativa, os dois conceitos se complementam: a <strong>prevenção</strong> reduz riscos específicos (como uma doença ocupacional), enquanto a <strong>promoção</strong> cria condições mais amplas de bem-estar — físico, mental e social — que tornam o ambiente de trabalho mais saudável como um todo.</p>";
+    c.appendChild(b);
+    var ex = el("div","example");
+    ex.innerHTML = "<span class='eyebrow'>Para fixar</span><p style='margin:0;'>Desde a atualização de 2024 da NR-1, os <strong>riscos psicossociais</strong> (como sobrecarga, assédio e esgotamento) também precisam ser identificados e gerenciados pelas empresas — reforçando que saúde no trabalho vai além do corpo físico.</p>";
+    c.appendChild(ex);
+  });
+
+  addSlide("saude","Políticas e programas no ambiente corporativo", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","Promoção da Saúde · 2 de 2"));
+    c.appendChild(el("h2","","Programas de saúde mais comuns nas empresas"));
+    c.appendChild(el("p","lede","Políticas de promoção da saúde variam em formato, mas costumam atuar nessas frentes."));
+    var grid = el("div","grid-3");
+    grid.appendChild(el("div","card","<h4>Saúde física</h4><p>Ginástica laboral, pausas ativas, incentivo a exercícios e parcerias com academias.</p>"));
+    grid.appendChild(el("div","card","<h4>Saúde mental</h4><p>Apoio psicológico, canais de escuta, campanhas antiestigma e gestão de carga de trabalho.</p>"));
+    grid.appendChild(el("div","card","<h4>Prevenção clínica</h4><p>Check-up periódico, campanhas de vacinação e orientação nutricional.</p>"));
+    grid.appendChild(el("div","card","<h4>Hábitos</h4><p>Combate ao tabagismo, incentivo ao sono adequado e alimentação saudável nos refeitórios.</p>"));
+    grid.appendChild(el("div","card","<h4>Ambiente saudável</h4><p>Ergonomia, qualidade do ar, iluminação e conforto acústico nos postos de trabalho.</p>"));
+    grid.appendChild(el("div","card","<h4>Cultura e liderança</h4><p>Lideranças treinadas para reconhecer sinais de sofrimento e promover equilíbrio entre vida pessoal e profissional.</p>"));
+    c.appendChild(grid);
+    reflectionBlock(c, [{
+      scenario:"Uma empresa oferece uma sessão de ginástica laboral de 10 minutos por semana, mas mantém metas de produtividade tão agressivas que quase nenhum colaborador se sente à vontade para participar sem atrasar suas entregas.",
+      question:"O que falta para que esse programa realmente funcione como promoção da saúde, e não apenas como uma ação simbólica?",
+      analysis:"Falta coerência entre o discurso e a organização do trabalho: promoção da saúde exige que a rotina (metas, prazos, carga) permita de fato o uso dos programas oferecidos. Um benefício que colide com a pressão do dia a dia tende a ser pouco usado e perder credibilidade."
+    }]);
+    var qc = el("div","block"); qc.style.marginTop="22px";
+    qc.appendChild(el("h3","","Verifique o que você reteve"));
+    c.appendChild(qc);
+    quizBlock(c, "saude", [
+      {q:"Qual documento da OMS define o conceito moderno de promoção da saúde?", opts:["Carta de Ottawa (1986)","Lei 8.213/91","NR-7","Agenda 2030"], a:0},
+      {q:"Desde a atualização de 2024, a NR-1 passou a exigir que as empresas também gerenciem:", opts:["Apenas riscos químicos","Riscos psicossociais, além dos riscos físicos, químicos, biológicos e ergonômicos","Somente o clima organizacional","Apenas metas de produtividade"], a:1}
+    ]);
+  });
+
+  /* ========================================================= MÓDULO: QUALIDADE DE VIDA NO TRABALHO */
+  addSlide("qvt","Conceito e métodos", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","Qualidade de Vida no Trabalho · 1 de 4"));
+    c.appendChild(el("h2","","O que é Qualidade de Vida no Trabalho (QVT)"));
+    c.appendChild(el("p","lede","QVT é o conjunto de ações que uma empresa adota para tornar o ambiente de trabalho mais humano, saudável e produtivo."));
+    var b = el("div","block");
+    b.innerHTML = "<p><strong>Qualidade de Vida no Trabalho</strong> envolve a implantação de melhorias e inovações gerenciais, tecnológicas e estruturais nas condições de trabalho, visando o bem-estar físico, psicológico e social dos colaboradores — sem perder de vista os resultados do negócio.</p>";
+    c.appendChild(b);
+    var b2 = el("div","block");
+    b2.innerHTML = "<h3>Principais modelos teóricos</h3>";
+    c.appendChild(b2);
+    var grid = el("div","grid-3");
+    grid.appendChild(el("div","card","<h4>Modelo de Walton (1973)</h4><p>Avalia a QVT em oito categorias, como compensação justa, condições de segurança, uso de capacidades e relevância social do trabalho.</p>"));
+    grid.appendChild(el("div","card","<h4>Modelo de Hackman & Oldham</h4><p>Foca nas características do cargo: variedade de tarefas, significado, autonomia e feedback como geradores de motivação.</p>"));
+    grid.appendChild(el("div","card","<h4>Modelo de Westley</h4><p>Descreve quatro problemas a resolver: econômico (equidade), político (poder), psicológico (autorrealização) e sociológico (participação).</p>"));
+    c.appendChild(grid);
+    var ex = el("div","example"); ex.style.marginTop="20px";
+    ex.innerHTML = "<span class='eyebrow'>Diferença importante</span><p style='margin:0;'>QVT não é apenas \"benefícios\" (vale-refeição, plano de saúde). Benefícios são insumos; QVT é o resultado percebido pelo colaborador sobre como é, de fato, trabalhar naquela empresa.</p>";
+    c.appendChild(ex);
+  });
+
+  addSlide("qvt","Perfil da empresa e análise de necessidades", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","Qualidade de Vida no Trabalho · 2 de 4"));
+    c.appendChild(el("h2","","Antes de agir: conhecer a empresa e suas necessidades"));
+    c.appendChild(el("p","lede","Um programa de QVT eficaz começa com diagnóstico, não com a cópia de iniciativas de outras empresas."));
+    stepsList(c, [
+      {t:"Levantar o perfil da empresa", d:"Setor, porte, faixa etária e perfil dos colaboradores, turnos, nível de risco da atividade e cultura organizacional existente."},
+      {t:"Mapear indicadores já disponíveis", d:"Absenteísmo, rotatividade (turnover), afastamentos por saúde, acidentes e resultados de avaliações de desempenho."},
+      {t:"Ouvir quem vive a rotina", d:"Entrevistas, grupos focais e conversas com lideranças para captar necessidades que os números não mostram."},
+      {t:"Aplicar instrumentos de pesquisa", d:"Questionários estruturados (ex.: baseados no modelo de Walton) para medir percepções de forma padronizada e comparável."},
+      {t:"Priorizar e planejar", d:"Cruzar os dados para identificar as dimensões mais críticas e desenhar ações realistas, com metas e prazos."}
+    ]);
+    var ex = el("div","example"); ex.style.marginTop="18px";
+    ex.innerHTML = "<span class='eyebrow'>Atenção</span><p style='margin:0;'>Uma empresa industrial com alto índice de afastamento por lesões terá prioridades de QVT bem diferentes de uma empresa de tecnologia com alto turnover por esgotamento mental. O diagnóstico é o que evita um programa \"genérico\".</p>";
+    c.appendChild(ex);
+  });
+
+  addSlide("qvt","Pesquisas e aplicações", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","Qualidade de Vida no Trabalho · 3 de 4"));
+    c.appendChild(el("h2","","Lendo os resultados de uma pesquisa de QVT"));
+    c.appendChild(el("p","lede","Exemplo ilustrativo de resultado de uma pesquisa interna, com notas de 0 a 100 por dimensão (adaptado do modelo de Walton)."));
+    bars(c, [
+      {label:"Compensação justa", value:58, suffix:"/100"},
+      {label:"Condições de segurança e saúde", value:81, suffix:"/100"},
+      {label:"Uso e desenvolvimento de capacidades", value:64, suffix:"/100"},
+      {label:"Oportunidades de crescimento", value:47, suffix:"/100"},
+      {label:"Integração social na empresa", value:76, suffix:"/100"},
+      {label:"Equilíbrio trabalho e vida pessoal", value:52, suffix:"/100"}
+    ], 100);
+    var b = el("div","block"); b.style.marginTop="22px";
+    b.innerHTML = "<h3>Como aplicar esse tipo de resultado</h3><p>Dimensões com nota baixa (como \"oportunidades de crescimento\", no exemplo) indicam onde o programa de QVT deve priorizar ações — planos de carreira, trilhas de capacitação ou processos mais transparentes de promoção. Dimensões altas (como \"segurança e saúde\") mostram pontos fortes a manter e comunicar.</p>";
+    c.appendChild(b);
+    var grid = el("div","grid-3");
+    grid.appendChild(el("div","card","<h4>Questionários</h4><p>Instrumentos estruturados, aplicados periodicamente, que permitem comparar resultados ao longo do tempo.</p>"));
+    grid.appendChild(el("div","card","<h4>Entrevistas e grupos focais</h4><p>Captam contexto e causas por trás dos números, especialmente em temas sensíveis.</p>"));
+    grid.appendChild(el("div","card","<h4>Indicadores objetivos</h4><p>Absenteísmo, turnover e afastamentos funcionam como \"termômetros\" indiretos da QVT.</p>"));
+    c.appendChild(grid);
+  });
+
+  addSlide("qvt","Cenário para reflexão", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","Qualidade de Vida no Trabalho · 4 de 4"));
+    c.appendChild(el("h2","","Quando o programa de QVT não resolve o problema real"));
+    reflectionBlock(c, [{
+      scenario:"Uma pesquisa de QVT mostrou nota baixíssima em \"equilíbrio entre trabalho e vida pessoal\". Em resposta, a empresa comprou uma mesa de ping-pong para o escritório e anunciou a medida como \"programa de qualidade de vida\".",
+      question:"Essa ação resolve a causa identificada na pesquisa? O que uma resposta mais adequada exigiria?",
+      analysis:"Não resolve: lazer no escritório não ataca a causa (provavelmente jornada excessiva, metas incompatíveis com o tempo disponível, ou cultura de disponibilidade constante). Uma resposta adequada exigiria rever carga de trabalho, política de horários, respeito a desconexão e, possivelmente, dimensionamento de equipe — ou seja, mudança estrutural, não apenas um benefício simbólico."
+    }]);
+    var qc = el("div","block"); qc.style.marginTop="22px";
+    qc.appendChild(el("h3","","Verifique o que você reteve"));
+    c.appendChild(qc);
+    quizBlock(c, "qvt", [
+      {q:"O modelo de Walton avalia a QVT a partir de quantas categorias?", opts:["Três","Cinco","Oito","Dez"], a:2},
+      {q:"Qual é o primeiro passo recomendado antes de implantar um programa de QVT?", opts:["Copiar o programa de outra empresa do mesmo setor","Fazer um diagnóstico do perfil da empresa e das necessidades reais dos colaboradores","Comprar benefícios de bem-estar populares no mercado","Reduzir o quadro de pessoal"], a:1}
+    ]);
+  });
+
+  /* ========================================================= MÓDULO: ENDOMARKETING */
+  addSlide("endo","Conceito e finalidade", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","Endomarketing · 1 de 2"));
+    c.appendChild(el("h2","","Endomarketing: marketing para dentro de casa"));
+    c.appendChild(el("p","lede","Antes de convencer o cliente externo, a empresa precisa engajar quem faz o produto ou serviço acontecer: seus colaboradores."));
+    var b = el("div","block");
+    b.innerHTML = "<p><strong>Endomarketing</strong> (ou marketing interno), termo cunhado por Saul Bekin (1995), é o conjunto de ações de comunicação e engajamento direcionadas ao público interno — os colaboradores — tratados, nessa lógica, como \"clientes internos\" da empresa.</p>"+
+      "<p>A ideia central é simples: um colaborador que entende, acredita e se orgulha da empresa onde trabalha comunica isso, de forma autêntica, para fora — para clientes, familiares e para o mercado.</p>";
+    c.appendChild(b);
+    var grid = el("div","grid-3");
+    grid.appendChild(el("div","card","<h4>Informar</h4><p>Garantir que todos conheçam estratégia, valores, metas e decisões relevantes da empresa.</p>"));
+    grid.appendChild(el("div","card","<h4>Engajar</h4><p>Fazer o colaborador sentir-se parte do propósito da empresa, não apenas um executor de tarefas.</p>"));
+    grid.appendChild(el("div","card","<h4>Alinhar</h4><p>Reduzir ruídos entre o que a empresa diz que é e o que o colaborador vivencia na prática.</p>"));
+    c.appendChild(grid);
+    var ex = el("div","example"); ex.style.marginTop="20px";
+    ex.innerHTML = "<span class='eyebrow'>Para fixar</span><p style='margin:0;'>Lançar uma campanha publicitária externa sem antes informar os próprios colaboradores é um erro clássico de endomarketing — eles podem descobrir novidades da própria empresa pela TV ou pelas redes sociais, o que gera desconfiança.</p>";
+    c.appendChild(ex);
+  });
+
+  addSlide("endo","Comunicação e aplicabilidade", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","Endomarketing · 2 de 2"));
+    c.appendChild(el("h2","","Como o endomarketing se materializa no dia a dia"));
+    c.appendChild(el("p","lede","Um fluxo típico de comunicação interna usado para dar suporte a uma ação de endomarketing."));
+    seqFlow(c, [
+      "Decisão ou novidade da empresa",
+      "Alinhamento com lideranças",
+      "Comunicação direta aos times",
+      "Canais internos (mural, e-mail, app, intranet)",
+      "Espaço para dúvidas e feedback",
+      "Reforço em ações e eventos internos"
+    ]);
+    var b = el("div","block"); b.style.marginTop="22px";
+    b.innerHTML = "<h3>Onde o endomarketing aparece</h3>";
+    c.appendChild(b);
+    var grid = el("div","grid-3");
+    grid.appendChild(el("div","card","<h4>Onboarding</h4><p>Integração de novos colaboradores que já comunica cultura e valores desde o primeiro dia.</p>"));
+    grid.appendChild(el("div","card","<h4>Canais internos</h4><p>Newsletters, intranets, apps corporativos e murais que mantêm todos informados.</p>"));
+    grid.appendChild(el("div","card","<h4>Reconhecimento</h4><p>Programas que celebram conquistas e tempo de empresa, fortalecendo pertencimento.</p>"));
+    grid.appendChild(el("div","card","<h4>Eventos internos</h4><p>Convenções, treinamentos e celebrações que reforçam identidade e propósito.</p>"));
+    grid.appendChild(el("div","card","<h4>Escuta ativa</h4><p>Pesquisas de clima e canais de sugestão que tornam a comunicação uma via de mão dupla.</p>"));
+    grid.appendChild(el("div","card","<h4>Liderança como porta-voz</h4><p>Gestores treinados para traduzir e reforçar as mensagens da empresa no dia a dia da equipe.</p>"));
+    c.appendChild(grid);
+    reflectionBlock(c, [{
+      scenario:"Uma empresa decide mudar sua política de metas e comissionamento. A diretoria publica a nova política apenas em um documento extenso na intranet, sem reunião, sem explicação das lideranças e sem espaço para perguntas.",
+      question:"Quais etapas do fluxo de comunicação interna foram ignoradas, e qual o risco provável disso?",
+      analysis:"Faltaram o alinhamento prévio com lideranças, a comunicação direta e o espaço para dúvidas — etapas centrais do endomarketing. O risco é a mensagem ser mal interpretada, gerar rumores e desconfiança, mesmo que a mudança em si seja razoável: a forma de comunicar afeta tanto quanto o conteúdo."
+    }]);
+    var qc = el("div","block"); qc.style.marginTop="22px";
+    qc.appendChild(el("h3","","Verifique o que você reteve"));
+    c.appendChild(qc);
+    quizBlock(c, "endo", [
+      {q:"Quem é considerado o \"cliente\" central do endomarketing?", opts:["O acionista","O fornecedor","O colaborador (público interno)","O concorrente"], a:2},
+      {q:"Qual é um erro clássico de endomarketing citado no material?", opts:["Treinar lideranças para comunicar mudanças","Fazer pesquisa de clima organizacional","Anunciar uma novidade da empresa externamente antes de informar os próprios colaboradores","Criar um programa de reconhecimento interno"], a:2}
+    ]);
+  });
+
+  /* ========================================================= MÓDULO: LEGISLAÇÃO DE SST */
+  addSlide("legis","Base legal e documentos obrigatórios", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","Legislação de SST · 1 de 5"));
+    c.appendChild(el("h2","","De onde vêm as regras de segurança e saúde no trabalho"));
+    c.appendChild(el("p","lede","A legislação brasileira de SST (Segurança e Saúde no Trabalho) segue uma hierarquia clara, do texto constitucional às normas técnicas detalhadas."));
+    treeNode(c, null, "Constituição Federal (art. 7º, XXII)", [
+      {code:"", label:"CLT — Consolidação das Leis do Trabalho (Capítulo V: Segurança e Medicina do Trabalho)", children:[
+        {code:"NRs", label:"Normas Regulamentadoras do MTE — detalham obrigações técnicas específicas", children:[
+          {code:"NR-1", label:"Disposições gerais e Gerenciamento de Riscos Ocupacionais (PGR)"},
+          {code:"NR-4", label:"SESMT"},
+          {code:"NR-5", label:"CIPA"},
+          {code:"NR-6", label:"EPI"},
+          {code:"NR-7", label:"PCMSO"},
+          {code:"NR-9/17/26/35", label:"Agentes ambientais, ergonomia, sinalização, altura (entre outras)"}
+        ]}
+      ]}
+    ], 0);
+    var b = el("div","block"); b.style.marginTop="24px";
+    b.innerHTML = "<h3>Dois documentos centrais: PGR e PCMSO</h3>";
+    c.appendChild(b);
+    var grid = el("div","grid-2");
+    grid.appendChild(el("div","card","<h4>PGR — Programa de Gerenciamento de Riscos (NR-1)</h4><p>Documento que reúne o <strong>Inventário de Riscos</strong> (o que existe e onde) e o <strong>Plano de Ação</strong> (o que será feito, por quem e até quando). Substituiu o antigo PPRA.</p>"));
+    grid.appendChild(el("div","card","<h4>PCMSO — Programa de Controle Médico de Saúde Ocupacional (NR-7)</h4><p>Define os exames médicos obrigatórios — admissional, periódico, de retorno ao trabalho, de mudança de função e demissional — e gera o ASO (Atestado de Saúde Ocupacional).</p>"));
+    c.appendChild(grid);
+  });
+
+  addSlide("legis","Hierarquia de controle: EPC antes do EPI", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","Legislação de SST · 2 de 5"));
+    c.appendChild(el("h2","","Proteção coletiva vem antes da proteção individual"));
+    c.appendChild(el("p","lede","A legislação estabelece uma ordem de prioridade para o controle de riscos — o EPI é sempre o último recurso, não o primeiro."));
+    pyramid(c, [
+      {t:"1. Eliminar o risco na origem", c:"var(--good)"},
+      {t:"2. Substituir por algo menos perigoso", c:"var(--cat-2)"},
+      {t:"3. Controles de engenharia e EPC (proteção coletiva)", c:"var(--cat-1)"},
+      {t:"4. Controles administrativos (treinamento, rotina, sinalização)", c:"var(--cat-3)"},
+      {t:"5. EPI — proteção individual (último recurso)", c:"var(--bad)"}
+    ]);
+    var b = el("div","block"); b.style.marginTop="26px";
+    b.innerHTML = "<p>O <strong>EPC (Equipamento de Proteção Coletiva)</strong> protege todos os expostos ao risco ao mesmo tempo — como um guarda-corpo, um sistema de exaustão ou o enclausuramento de uma máquina. Já o <strong>EPI (Equipamento de Proteção Individual, NR-6)</strong> protege apenas quem o utiliza corretamente, dependendo do comportamento humano — por isso só deve ser a solução quando as medidas anteriores não eliminam o risco por completo.</p>";
+    c.appendChild(b);
+    c.appendChild(el("h3","","Exemplos de EPI e EPC por tipo de risco"));
+    flipGrid(c, [
+      {kicker:"EPC", t:"Guarda-corpo", d:"Protege contra queda de nível em bordas, aberturas e plataformas — todos que circulam pelo local são protegidos ao mesmo tempo."},
+      {kicker:"EPC", t:"Exaustão localizada", d:"Remove gases, fumos ou poeiras na origem, protegendo todo o ambiente de trabalho."},
+      {kicker:"EPC", t:"Sinalização de segurança (NR-26)", d:"Cores e placas padronizadas que alertam sobre riscos para qualquer pessoa no local."},
+      {kicker:"EPI", t:"Capacete de segurança", d:"Protege a cabeça de quem o utiliza contra impactos e quedas de objetos."},
+      {kicker:"EPI", t:"Luva de proteção", d:"Protege as mãos de quem a utiliza contra cortes, produtos químicos ou choque elétrico, conforme o risco."},
+      {kicker:"EPI", t:"Cinto de segurança tipo paraquedista", d:"Obrigatório em trabalho em altura (NR-35), protege individualmente contra queda."}
+    ]);
+  });
+
+  addSlide("legis","Normas específicas de risco", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","Legislação de SST · 3 de 5"));
+    c.appendChild(el("h2","","Quatro normas regulamentadoras que você precisa conhecer"));
+    c.appendChild(el("p","lede","Cada uma dessas NRs trata de um tipo de exposição recorrente nos ambientes de trabalho."));
+    var grid = el("div","grid-2");
+    grid.appendChild(el("div","card","<h4>NR-17 · Ergonomia</h4><p>Estabelece parâmetros para adaptar as condições de trabalho às características do trabalhador — mobiliário, ritmo, postura e organização das tarefas — para reduzir desconforto e lesões.</p>"));
+    grid.appendChild(el("div","card","<h4>NR-35 · Trabalho em altura</h4><p>Aplica-se a toda atividade executada acima de <strong>2 metros</strong> do nível inferior com risco de queda. Exige treinamento, Permissão de Trabalho e uso de sistemas de ancoragem.</p>"));
+    grid.appendChild(el("div","card","<h4>NR-10 · Segurança em eletricidade</h4><p>Define medidas de controle para instalações e serviços em eletricidade, cobrindo desde o desligamento seguro de circuitos até o uso de EPIs isolantes.</p>"));
+    grid.appendChild(el("div","card","<h4>NR-26 · Sinalização de segurança</h4><p>Padroniza cores (vermelho para combate a incêndio, amarelo para atenção, verde para emergência/saúde, entre outras) para identificação rápida de riscos e equipamentos.</p>"));
+    c.appendChild(grid);
+    var ex = el("div","example"); ex.style.marginTop="20px";
+    ex.innerHTML = "<span class='eyebrow'>Para fixar</span><p style='margin:0;'>Essas normas não substituem o PGR — elas o <strong>complementam</strong>, trazendo exigências técnicas detalhadas para riscos específicos já identificados no Inventário de Riscos da empresa.</p>";
+    c.appendChild(ex);
+  });
+
+  addSlide("legis","Jogo: relacione a norma ao tema", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","Legislação de SST · 4 de 5"));
+    c.appendChild(el("h2","","Associe cada Norma Regulamentadora ao seu tema"));
+    c.appendChild(el("p","lede","Clique em uma norma à esquerda e depois no tema correspondente à direita."));
+    connectGame(c, [
+      {id:1, lanc:"NR-1", conta:"Disposições gerais e Gerenciamento de Riscos Ocupacionais (PGR)"},
+      {id:2, lanc:"NR-4", conta:"Serviço Especializado em Engenharia de Segurança e Medicina do Trabalho (SESMT)"},
+      {id:3, lanc:"NR-5", conta:"Comissão Interna de Prevenção de Acidentes e Assédio (CIPA)"},
+      {id:4, lanc:"NR-6", conta:"Equipamento de Proteção Individual (EPI)"},
+      {id:5, lanc:"NR-7", conta:"Programa de Controle Médico de Saúde Ocupacional (PCMSO)"},
+      {id:6, lanc:"NR-10", conta:"Segurança em instalações e serviços em eletricidade"},
+      {id:7, lanc:"NR-17", conta:"Ergonomia"},
+      {id:8, lanc:"NR-26", conta:"Sinalização de segurança"},
+      {id:9, lanc:"NR-35", conta:"Trabalho em altura"}
+    ], 6);
+  });
+
+  addSlide("legis","Cenário para reflexão", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","Legislação de SST · 5 de 5"));
+    c.appendChild(el("h2","","Cumprir a norma \"no papel\" é suficiente?"));
+    reflectionBlock(c, [{
+      scenario:"Uma empresa de construção civil distribui capacetes e cintos de segurança a todos os trabalhadores que atuam em altura, mas não instala nenhuma proteção coletiva (como guarda-corpo ou rede de segurança) nas bordas das lajes, alegando que \"já forneceu o EPI exigido pela NR-35\".",
+      question:"Essa empresa está, de fato, cumprindo a lógica de segurança da legislação? O que está sendo invertido?",
+      analysis:"Está invertendo a hierarquia de controle: a lei prioriza eliminar ou controlar coletivamente o risco antes de recorrer ao EPI. Fornecer apenas o EPI, sem EPC, transfere para o trabalhador individual (e para seu uso correto e ininterrupto do equipamento) uma responsabilidade que deveria ser, antes de tudo, estrutural — por isso o uso de EPI isolado é tratado como medida insuficiente, mesmo estando formalmente \"fornecido\"."
+    }]);
+    var qc = el("div","block"); qc.style.marginTop="22px";
+    qc.appendChild(el("h3","","Verifique o que você reteve"));
+    c.appendChild(qc);
+    quizBlock(c, "legis", [
+      {q:"O PGR, previsto na NR-1, é composto por quais partes?", opts:["Apenas o Inventário de Riscos","Inventário de Riscos e Plano de Ação","Apenas o Plano de Ação","ASO e CAT"], a:1},
+      {q:"Na hierarquia de controle de riscos, o EPI deve ser usado:", opts:["Como primeira e única medida de segurança","Antes de qualquer EPC","Como último recurso, quando as demais medidas não eliminam o risco por completo","Apenas em trabalho em altura"], a:2},
+      {q:"A partir de qual altura a NR-35 considera \"trabalho em altura\"?", opts:["0,5 metro","1 metro","2 metros","5 metros"], a:2}
+    ]);
+  });
+
+  /* ========================================================= MÓDULO: RISCOS OCUPACIONAIS */
+  addSlide("riscos","Conceito e tipos", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","Riscos Ocupacionais · 1 de 3"));
+    c.appendChild(el("h2","","O que é um risco ocupacional"));
+    c.appendChild(el("p","lede","Risco ocupacional é a probabilidade de um trabalhador sofrer dano à saúde por estar exposto a um agente ou condição do trabalho."));
+    var grid = el("div","grid-5");
+    grid.appendChild(el("div","card","<h4>Físico</h4><p>Ruído, calor, frio, vibração, radiação e pressão anormal.</p>"));
+    grid.appendChild(el("div","card","<h4>Químico</h4><p>Poeiras, gases, vapores e substâncias tóxicas ou inflamáveis.</p>"));
+    grid.appendChild(el("div","card","<h4>Biológico</h4><p>Vírus, bactérias, fungos e outros microrganismos.</p>"));
+    grid.appendChild(el("div","card","<h4>Ergonômico</h4><p>Posturas inadequadas, esforço repetitivo, ritmo excessivo e mobiliário incompatível.</p>"));
+    grid.appendChild(el("div","card","<h4>De acidente</h4><p>Máquinas sem proteção, arranjo físico inadequado, eletricidade e risco de queda.</p>"));
+    c.appendChild(grid);
+    var ex = el("div","example"); ex.style.marginTop="20px";
+    ex.innerHTML = "<span class='eyebrow'>Atualização recente</span><p style='margin:0;'>Desde 2024, a NR-1 também exige a identificação de <strong>riscos psicossociais</strong> (sobrecarga, assédio moral, jornadas exaustivas) dentro do PGR — ampliando o conceito tradicional de risco ocupacional.</p>";
+    c.appendChild(ex);
+  });
+
+  addSlide("riscos","Métodos de identificação", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","Riscos Ocupacionais · 2 de 3"));
+    c.appendChild(el("h2","","Como os riscos são identificados e mapeados"));
+    stepsList(c, [
+      {t:"Inspeção de segurança", d:"Percurso planejado pelo ambiente de trabalho para observar condições, comportamentos e desvios de segurança."},
+      {t:"Análise Preliminar de Risco (APR)", d:"Levantamento feito antes do início de uma atividade (especialmente não rotineira), identificando perigos e medidas de controle necessárias."},
+      {t:"Checklists técnicos", d:"Listas de verificação padronizadas, úteis para auditorias periódicas e para comparar condições ao longo do tempo."},
+      {t:"Entrevistas com trabalhadores", d:"Quem executa a tarefa no dia a dia frequentemente percebe riscos que não aparecem em documentos."},
+      {t:"Mapa de risco", d:"Representação gráfica, elaborada com participação da CIPA, que localiza visualmente os riscos predominantes em cada setor, usando cores padronizadas."}
+    ]);
+    var b = el("div","block"); b.style.marginTop="20px";
+    b.innerHTML = "<h3>Cores padronizadas do mapa de risco</h3>";
+    c.appendChild(b);
+    var grid = el("div","grid-5");
+    grid.appendChild(el("div","card","<h4 style='color:var(--good);'>● Verde</h4><p>Risco biológico</p>"));
+    grid.appendChild(el("div","card","<h4 style='color:var(--bad);'>● Vermelho</h4><p>Risco químico</p>"));
+    grid.appendChild(el("div","card","<h4 style='color:#8a5a2b;'>● Marrom</h4><p>Risco físico</p>"));
+    grid.appendChild(el("div","card","<h4 style='color:var(--warn);'>● Amarelo</h4><p>Risco ergonômico</p>"));
+    grid.appendChild(el("div","card","<h4 style='color:var(--cat-1);'>● Azul</h4><p>Risco de acidente</p>"));
+    c.appendChild(grid);
+  });
+
+  addSlide("riscos","Mapeamento interativo de risco", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","Riscos Ocupacionais · 3 de 3"));
+    c.appendChild(el("h2","","Matriz de probabilidade × severidade"));
+    c.appendChild(el("p","lede","Uma das ferramentas mais usadas para priorizar riscos: cruzar a chance de ocorrência com a gravidade das consequências. Toque nas células para explorar exemplos."));
+    riskMatrix(c, {
+      examples:{
+        "0_4":{risco:"Queda de altura sem nenhuma proteção coletiva ou individual em uma obra, em uma frente de trabalho usada diariamente.", resposta:"Parar a atividade imediatamente, instalar proteção coletiva (guarda-corpo/rede) e só retomar o trabalho com EPI adequado e treinamento comprovado."},
+        "0_0":{risco:"Exposição pontual e rara a uma máquina com proteção íntegra, em operação já consolidada e bem treinada.", resposta:"Risco catastrófico, mas pouco provável — ainda assim deve ser monitorado e revisado após qualquer mudança no processo ou na manutenção."},
+        "2_2":{risco:"Postura inadequada recorrente em estações de trabalho sem ajuste ergonômico, gerando desconforto frequente mas raramente afastamento.", resposta:"Planejar ação de médio prazo: ajuste de mobiliário, pausas, e orientação ergonômica — não é emergência, mas tende a crescer se ignorado."},
+        "1_4":{risco:"Ruído constante acima do limite de tolerância em um setor operando em todos os turnos, sem uso de protetor auricular.", resposta:"Ação prioritária: controle de engenharia (redução na fonte), uso obrigatório e fiscalizado de EPI, e inclusão no PCMSO com audiometria periódica."}
+      }
+    });
+    var b = el("div","block"); b.style.marginTop="22px";
+    b.innerHTML = "<p>Essa priorização alimenta diretamente o <strong>Plano de Ação do PGR</strong>: riscos no quadrante crítico (vermelho) recebem prazo imediato de tratamento; riscos baixos (verde) entram em rotina de monitoramento periódico.</p>";
+    c.appendChild(b);
+    var qc = el("div","block"); qc.style.marginTop="18px";
+    qc.appendChild(el("h3","","Verifique o que você reteve"));
+    c.appendChild(qc);
+    quizBlock(c, "riscos", [
+      {q:"Qual cor do mapa de risco representa o risco ergonômico?", opts:["Verde","Vermelho","Amarelo","Azul"], a:2},
+      {q:"A Análise Preliminar de Risco (APR) é feita principalmente:", opts:["Depois que o acidente já ocorreu","Antes do início de uma atividade, para identificar perigos e definir controles","Apenas uma vez por ano, independente da atividade","Somente pelo SESMT, sem participação dos trabalhadores"], a:1},
+      {q:"Em uma matriz de probabilidade × severidade, um risco classificado como crítico (alta probabilidade e alta severidade) deve receber:", opts:["Nenhuma ação, por ser raro","Apenas um aviso informal","Ação imediata e prioritária","Ação apenas no próximo ano fiscal"], a:2}
+    ]);
+  });
+
+  /* ========================================================= MÓDULO: SESMT */
+  addSlide("sesmt","Conceito, finalidade e composição", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","SESMT · 1 de 2"));
+    c.appendChild(el("h2","","Serviço Especializado em Engenharia de Segurança e em Medicina do Trabalho"));
+    c.appendChild(el("p","lede","O SESMT é a equipe técnica interna dedicada a proteger a vida e a saúde do trabalhador dentro da empresa."));
+    var b = el("div","block");
+    b.innerHTML = "<p>Previsto na <strong>NR-4</strong>, o SESMT tem a finalidade de <strong>antecipar, reconhecer, avaliar e controlar</strong> riscos ambientais existentes no local de trabalho, em conjunto com medidas de controle e proteção à integridade física e mental do trabalhador.</p>";
+    c.appendChild(b);
+    radialDiagram(c, [
+      {angle:0,  label:"Técnico de Segurança do Trabalho", text:"Atua na linha de frente: inspeções, treinamentos, investigação de acidentes e apoio na elaboração do PGR."},
+      {angle:90, label:"Engenheiro de Segurança", text:"Avalia riscos sob o ponto de vista técnico e de engenharia, propondo soluções estruturais e de processo."},
+      {angle:180, label:"Médico do Trabalho", text:"Coordena o PCMSO, avalia aptidão e acompanha a saúde ocupacional dos trabalhadores."},
+      {angle:270, label:"Enfermeiro e Auxiliar de Enfermagem do Trabalho", text:"Executa ações do PCMSO, primeiros socorros e acompanhamento contínuo de saúde."}
+    ], "SESMT", {completionText:"A composição exata (quais profissionais e em que quantidade) varia conforme o grau de risco da atividade e o número de empregados da empresa — é isso que a NR-4 chama de \"dimensionamento\"."});
+  });
+
+  addSlide("sesmt","Requisitos legais para implantação", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","SESMT · 2 de 2"));
+    c.appendChild(el("h2","","Quando a empresa é obrigada a ter um SESMT"));
+    c.appendChild(el("p","lede","A obrigatoriedade e o tamanho do SESMT dependem de dois fatores definidos pela NR-4: o grau de risco da atividade (CNAE) e o número total de empregados do estabelecimento."));
+    var grid = el("div","grid-2");
+    grid.appendChild(el("div","card","<h4>Grau de risco</h4><p>Classificação de 1 (menor risco) a 4 (maior risco), atribuída a cada atividade econômica conforme o Quadro I da NR-4.</p>"));
+    grid.appendChild(el("div","card","<h4>Número de empregados</h4><p>Quanto maior o estabelecimento, maior a exigência de profissionais dedicados à segurança e à saúde do trabalho.</p>"));
+    c.appendChild(grid);
+    c.appendChild(el("h3","","Simulador didático de dimensionamento"));
+    var note = el("p","", "<em>Simplificação para fins de estudo — os números exatos de profissionais e cargas horárias devem sempre ser confirmados no Quadro II da NR-4 vigente.</em>");
+    note.style.fontSize = ".82rem"; note.style.color = "var(--ink-dim)";
+    c.appendChild(note);
+    calcCard(c, "Preciso de um SESMT dedicado?", [
+      {k:"grau", label:"Grau de risco (NR-4, Quadro I)", type:"select", v:"3", options:[
+        {v:"1", label:"Grau 1 — risco menor"},
+        {v:"2", label:"Grau 2"},
+        {v:"3", label:"Grau 3"},
+        {v:"4", label:"Grau 4 — risco maior"}
+      ]},
+      {k:"emp", label:"Número de empregados", v:120}
+    ], function(v){
+      var grau = parseInt(v.grau,10);
+      var emp = v.emp;
+      var limiar = grau>=3 ? 50 : 100;
+      var necessario = emp >= limiar;
+      var intensidade = !necessario ? "Dispensado" : (emp>500 ? "Equipe completa e robusta" : (emp>200 ? "Equipe multiprofissional" : "Equipe básica dedicada"));
+      return [
+        {label:"SESMT dedicado é exigido?", value: necessario ? "Sim" : "Provavelmente não"},
+        {label:"Referência de porte", value: intensidade},
+        {label:"Base legal", value:"NR-4, Quadros I e II"}
+      ];
+    });
+    var ex = el("div","example"); ex.style.marginTop="16px";
+    ex.innerHTML = "<span class='eyebrow'>Para fixar</span><p style='margin:0;'>Mesmo quando a empresa é dispensada de um SESMT próprio, ela não é dispensada de gerenciar riscos: pode contratar serviço terceirizado ou, em alguns casos, assumir a responsabilidade técnica por meio de profissional habilitado.</p>";
+    c.appendChild(ex);
+    var qc = el("div","block"); qc.style.marginTop="18px";
+    qc.appendChild(el("h3","","Verifique o que você reteve"));
+    c.appendChild(qc);
+    quizBlock(c, "sesmt", [
+      {q:"O dimensionamento do SESMT, conforme a NR-4, depende de quais dois fatores?", opts:["Faturamento e idade da empresa","Grau de risco da atividade e número de empregados","Localização geográfica e clima","Apenas o número de acidentes já ocorridos"], a:1},
+      {q:"Qual é a principal finalidade do SESMT?", opts:["Calcular a folha de pagamento","Antecipar, reconhecer, avaliar e controlar riscos ambientais no trabalho","Substituir a CIPA","Emitir apenas a CAT"], a:1}
+    ]);
+  });
+
+  /* ========================================================= MÓDULO: CIPA */
+  addSlide("cipa","Conceito e finalidade", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","CIPA · 1 de 3"));
+    c.appendChild(el("h2","","Comissão Interna de Prevenção de Acidentes e Assédio"));
+    c.appendChild(el("p","lede","A CIPA é a voz organizada dos próprios trabalhadores dentro da estrutura de prevenção da empresa."));
+    var b = el("div","block");
+    b.innerHTML = "<p>Prevista na <strong>NR-5</strong>, a CIPA tem como finalidade a <strong>observação e relato de condições de risco</strong> no ambiente de trabalho, a <strong>prevenção de acidentes e doenças</strong> decorrentes do trabalho e, desde a atualização trazida pela Lei 14.457/2022, também a prevenção ao <strong>assédio</strong> no ambiente corporativo.</p>";
+    c.appendChild(b);
+    var grid = el("div","grid-2");
+    grid.appendChild(el("div","card","<h4>Comissão paritária</h4><p>Metade dos membros é eleita pelos empregados em votação secreta; a outra metade é indicada pelo empregador — garantindo representação equilibrada.</p>"));
+    grid.appendChild(el("div","card","<h4>Papel preventivo, não fiscalizador punitivo</h4><p>A CIPA atua identificando riscos e propondo melhorias, servindo de ponte entre os trabalhadores e a gestão de segurança — não é um órgão de punição.</p>"));
+    c.appendChild(grid);
+  });
+
+  addSlide("cipa","Requisitos legais para implantação", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","CIPA · 2 de 3"));
+    c.appendChild(el("h2","","Como a CIPA é formada"));
+    stepsList(c, [
+      {t:"Verificação da obrigatoriedade", d:"A exigência e o número de membros seguem o Quadro I da NR-5, conforme o grau de risco da atividade (CNAE) e o número de empregados do estabelecimento."},
+      {t:"Convocação das eleições", d:"A empresa convoca eleições para a parte dos membros representantes dos empregados, com ampla divulgação e inscrição livre de candidaturas."},
+      {t:"Eleição em votação secreta", d:"Os empregados elegem seus representantes; o empregador indica livremente os seus."},
+      {t:"Posse e mandato", d:"Mandato de um ano, podendo haver reeleição. A gestão inclui treinamento obrigatório dos membros antes do início das atividades."},
+      {t:"Estabilidade do cipeiro", d:"Os representantes eleitos pelos empregados têm garantia de emprego desde o registro da candidatura até um ano após o término do mandato."}
+    ]);
+    var ex = el("div","example"); ex.style.marginTop="18px";
+    ex.innerHTML = "<span class='eyebrow'>Para fixar</span><p style='margin:0;'>Mesmo empresas dispensadas de montar uma CIPA formal (por terem poucos empregados ou baixo grau de risco) costumam nomear um <strong>Designado de CIPA</strong> para assumir funções equivalentes, conforme previsto na própria NR-5.</p>";
+    c.appendChild(ex);
+  });
+
+  addSlide("cipa","Principais ações e programas de prevenção", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","CIPA · 3 de 3"));
+    c.appendChild(el("h2","","O que a CIPA faz, na prática"));
+    var grid = el("div","grid-3");
+    grid.appendChild(el("div","card","<h4>Inspeções de segurança</h4><p>Percursos periódicos pelos ambientes de trabalho para identificar riscos e condições inseguras.</p>"));
+    grid.appendChild(el("div","card","<h4>Elaboração do mapa de risco</h4><p>Participa ativamente da construção do mapa de risco de cada setor, junto ao SESMT.</p>"));
+    grid.appendChild(el("div","card","<h4>SIPAT</h4><p>Organiza a Semana Interna de Prevenção de Acidentes do Trabalho, com palestras, dinâmicas e campanhas anuais.</p>"));
+    grid.appendChild(el("div","card","<h4>Investigação de acidentes</h4><p>Participa da análise das causas de acidentes e quase-acidentes, propondo ações corretivas.</p>"));
+    grid.appendChild(el("div","card","<h4>Canal de escuta</h4><p>Recebe relatos de riscos, condutas inseguras e situações de assédio, levando-os à gestão.</p>"));
+    grid.appendChild(el("div","card","<h4>Campanhas de prevenção</h4><p>Promove campanhas temáticas (uso de EPI, ergonomia, saúde mental) ao longo do ano.</p>"));
+    c.appendChild(grid);
+    reflectionBlock(c, [{
+      scenario:"Em uma fábrica, um representante da CIPA relata repetidamente, em reuniões registradas em ata, que uma máquina está sem proteção adequada na zona de corte. A gestão não toma nenhuma providência por três meses, até que ocorre um acidente nessa mesma máquina.",
+      question:"Do ponto de vista da legislação de SST, o que essa situação revela sobre a diferença entre ter uma CIPA e dar efetividade a ela?",
+      analysis:"Revela que a existência formal da CIPA não garante, por si só, a prevenção — o valor da comissão depende de a gestão tratar seus relatos com a mesma seriedade de uma auditoria técnica. As atas registradas também tornam a omissão juridicamente relevante: documentam que a empresa foi formalmente alertada sobre o risco antes do acidente ocorrer."
+    }]);
+    var qc = el("div","block"); qc.style.marginTop="22px";
+    qc.appendChild(el("h3","","Verifique o que você reteve"));
+    c.appendChild(qc);
+    quizBlock(c, "cipa", [
+      {q:"A composição da CIPA é definida como \"paritária\" porque:", opts:["Todos os membros são escolhidos pelo governo","Metade é eleita pelos empregados e metade indicada pelo empregador","Todos os membros são do mesmo setor","Apenas o empregador escolhe os membros"], a:1},
+      {q:"Qual evento anual é tradicionalmente organizado pela CIPA?", opts:["SIPAT — Semana Interna de Prevenção de Acidentes do Trabalho","Assembleia Geral de Acionistas","Convenção coletiva de trabalho","Auditoria fiscal"], a:0},
+      {q:"Até quando vai a estabilidade do representante eleito da CIPA?", opts:["Não existe estabilidade","Apenas durante a eleição","Do registro da candidatura até um ano após o fim do mandato","Pelo resto do contrato de trabalho"], a:2}
+    ]);
+  });
+
+  /* ========================================================= MÓDULO: CAT */
+  addSlide("cat","Conceito e fundamento legal", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","Comunicação de Acidente de Trabalho · 1 de 2"));
+    c.appendChild(el("h2","","O que é a CAT e por que ela existe"));
+    c.appendChild(el("p","lede","A CAT é o elo formal entre um acidente ou doença do trabalho e os direitos previdenciários do trabalhador."));
+    var b = el("div","block");
+    b.innerHTML = "<p>A <strong>Comunicação de Acidente de Trabalho (CAT)</strong> é o documento pelo qual a empresa informa ao <strong>INSS</strong> a ocorrência de um acidente de trabalho ou de uma doença ocupacional, viabilizando o acesso do trabalhador a benefícios previdenciários (como o auxílio por incapacidade temporária) e o reconhecimento oficial do nexo entre o dano e o trabalho.</p>"+
+      "<p>O fundamento legal está no <strong>artigo 22 da Lei 8.213/1991</strong>, que trata dos Planos de Benefícios da Previdência Social.</p>";
+    c.appendChild(b);
+    var grid = el("div","grid-3");
+    grid.appendChild(el("div","card","<h4>Acidente típico</h4><p>Ocorre pelo exercício do trabalho a serviço da empresa, causando lesão, perturbação funcional ou morte.</p>"));
+    grid.appendChild(el("div","card","<h4>Acidente de trajeto</h4><p>Ocorrido no percurso entre residência e trabalho, equiparado por lei a acidente de trabalho.</p>"));
+    grid.appendChild(el("div","card","<h4>Doença ocupacional</h4><p>Doença provocada ou desencadeada pelas condições específicas em que o trabalho é executado.</p>"));
+    c.appendChild(grid);
+    var ex = el("div","example"); ex.style.marginTop="18px";
+    ex.innerHTML = "<span class='eyebrow'>Para fixar</span><p style='margin:0;'>A CAT deve ser emitida <strong>mesmo quando não há afastamento</strong> do trabalhador — a obrigação nasce da ocorrência do acidente ou da doença, não da gravidade do resultado.</p>";
+    c.appendChild(ex);
+  });
+
+  addSlide("cat","Processo de comunicação", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","Comunicação de Acidente de Trabalho · 2 de 2"));
+    c.appendChild(el("h2","","Da ocorrência do acidente ao envio da CAT"));
+    seqFlow(c, [
+      "Acidente ou diagnóstico de doença ocupacional",
+      "Atendimento médico e primeiros socorros",
+      "Abertura da CAT (até o 1º dia útil seguinte; imediata em caso de morte)",
+      "Envio ao INSS (hoje também via eSocial, evento S-2210)",
+      "Cópias à empresa, ao sindicato, ao trabalhador/dependente e ao SUS",
+      "Acompanhamento do benefício e, se houver afastamento, do retorno ao trabalho"
+    ]);
+    var b = el("div","block"); b.style.marginTop="22px";
+    b.innerHTML = "<h3>Quem pode emitir a CAT</h3><p>A obrigação principal é da empresa, mas a lei prevê que, na ausência da comunicação empresarial, a CAT também pode ser emitida pelo próprio <strong>trabalhador</strong> (ou seu dependente), pelo <strong>sindicato</strong>, pelo <strong>médico</strong> que o atendeu ou por qualquer <strong>autoridade pública</strong> — garantindo que o acesso ao benefício não dependa exclusivamente da boa vontade do empregador.</p>";
+    c.appendChild(b);
+    docMock(c, "Modelo simplificado — uso didático", "Comunicação de Acidente de Trabalho (CAT)", [
+      {label:"Data e hora do acidente", value:"—"},
+      {label:"Local do acidente", value:"—"},
+      {label:"Parte do corpo atingida", value:"—"},
+      {label:"Tipo", value:"Típico / Trajeto / Doença ocupacional"},
+      {label:"Houve afastamento?", value:"Sim / Não"},
+      {label:"Emitente", value:"Empresa / Trabalhador / Sindicato / Médico / Autoridade"},
+      {label:"Prazo de envio", value:"Até o 1º dia útil seguinte (imediato se houver óbito)", total:true}
+    ], "Estrutura simplificada para fins didáticos — a emissão oficial é feita pelo canal do eSocial (evento S-2210) ou, em sua ausência, pelo formulário do INSS.");
+    reflectionBlock(c, [{
+      scenario:"Um colaborador sofre um corte superficial durante o expediente, é atendido no ambulatório da própria empresa, não precisa se afastar e retorna ao trabalho no mesmo dia. O gestor decide não abrir a CAT, argumentando que \"não houve afastamento, então não é necessário\".",
+      question:"Essa decisão está correta diante da legislação?",
+      analysis:"Não está correta: a obrigação de emitir a CAT nasce da ocorrência do acidente de trabalho, independentemente de haver ou não afastamento. Mesmo acidentes sem afastamento devem ser comunicados — a ausência de afastamento influencia o tipo de benefício eventualmente gerado, não a obrigatoriedade da comunicação em si."
+    }]);
+    var qc = el("div","block"); qc.style.marginTop="18px";
+    qc.appendChild(el("h3","","Verifique o que você reteve"));
+    c.appendChild(qc);
+    quizBlock(c, "cat", [
+      {q:"Qual lei fundamenta a obrigatoriedade da CAT?", opts:["CLT, art. 7º","Lei 8.213/1991, art. 22","NR-5","Lei 14.457/2022"], a:1},
+      {q:"Em regra, até quando a empresa deve comunicar um acidente de trabalho?", opts:["Até 30 dias depois","Até o primeiro dia útil seguinte à ocorrência (imediatamente, em caso de morte)","Até o fim do mês","Não há prazo definido"], a:1},
+      {q:"A CAT deve ser emitida mesmo quando não há afastamento do trabalhador?", opts:["Não, só é obrigatória em caso de afastamento","Sim, a obrigação nasce da ocorrência do acidente, com ou sem afastamento","Apenas se o trabalhador exigir","Apenas em acidentes de trajeto"], a:1}
+    ]);
+  });
+
+  /* ---------- GLOSSÁRIO ---------- */
+  addSlide("gloss","Glossário de termos", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","Glossário"));
+    c.appendChild(el("h2","","Glossário de termos"));
+    c.appendChild(el("p","lede","Busque por qualquer termo do material para revisar sua definição rapidamente."));
+    glossaryBlock(c);
+  });
+
+  /* ---------- SÍNTESE ---------- */
+  addSlide("fin","Conclusão", function(c){
+    c.appendChild(el("span","eyebrow slide-kicker","Síntese"));
+    var wrap = el("div","final-wrap");
+    var card = el("div","final-card");
+    card.innerHTML =
+      "<span class='eyebrow'>Jornada concluída</span>"+
+      "<h2 style='margin-top:10px;'>Você percorreu todo o guia</h2>"+
+      "<div class='final-score' id='finalScore'>—</div>"+
+      "<div class='final-message'>"+
+      "<p>Da sustentabilidade e responsabilidade socioambiental até a Comunicação de Acidente de Trabalho, você passou por conceitos, normas e ferramentas que sustentam a gestão de pessoas e a segurança no ambiente corporativo: RSE, promoção da saúde, QVT, endomarketing, legislação de SST, riscos ocupacionais, SESMT, CIPA e CAT.</p>"+
+      "<p>Esses temas se conectam: uma empresa que cuida da segurança física também constrói qualidade de vida; uma que comunica bem internamente (endomarketing) sustenta melhor seus programas de saúde e seus projetos socioambientais. Nenhum desses temas funciona isolado dos demais.</p>"+
+      "</div>"+
+      "<p class='final-signoff'>Bons estudos — e que esse conteúdo ajude você a enxergar a segurança e a qualidade de vida no trabalho não como obrigação burocrática, mas como parte central de uma boa gestão.<br><strong>Ari Ferreira Júnior</strong></p>"+
+      "<p class='final-contact'>Ficou com alguma dúvida ou sugestão sobre o conteúdo? Fala comigo: <a href='https://www.instagram.com/prof.arijunior/' target='_blank' rel='noopener'>@prof.arijunior</a></p>";
+    wrap.appendChild(card);
+    c.appendChild(wrap);
+    var b = el("div","block"); b.style.marginTop="18px";
+    b.innerHTML = "<p>Use o sumário à esquerda para voltar a qualquer tela sempre que precisar revisar — seu progresso e respostas ficam salvos neste navegador.</p>";
+    c.appendChild(b);
+    var btn = el("button","btn ghost small","Reiniciar progresso salvo");
+    btn.addEventListener("click", function(){
+      if(confirm("Isso vai apagar as respostas salvas dos quizzes. Continuar?")){
+        localStorage.removeItem(STORE_KEY);
+        state = {cur:0, visited:{}, answered:{}};
+        goTo(0);
+      }
+    });
+    c.appendChild(btn);
+    var total = 0, correct = 0;
+    Object.keys(state.answered).forEach(function(k){ total++; });
+    correct = Object.keys(state.correctSet||{}).length;
+    var fs = card.querySelector("#finalScore");
+    if(fs) fs.textContent = total>0 ? (correct+"/"+total+" acertos nos quizzes") : "Quizzes ainda não respondidos";
+  });
+
+  /* ========================================================= RENDER ENGINE */
+
+  var railModulesEl, stageEl, crumbEl, countEl, progressFillEl, scoreBadgeEl, prevBtn, nextBtn;
+  var modToIndices = {};
+  SLIDES.forEach(function(s,i){ (modToIndices[s.mod]=modToIndices[s.mod]||[]).push(i); });
+
+  function collapseAllRailMods(exceptId){
+    Array.prototype.forEach.call(railModulesEl.querySelectorAll(".rail-mod"), function(mw){
+      var open = exceptId!==null && mw.getAttribute("data-mod")===exceptId;
+      var sw = mw.querySelector(".rail-slides");
+      var num = mw.querySelector(".rail-mod-head .num");
+      mw.classList.toggle("collapsed", !open);
+      sw.style.display = open ? "" : "none";
+      num.textContent = open ? "▾" : "▸";
+    });
+  }
+
+  function updateScoreBadge(){
+    var total = Object.keys(state.answered).length;
+    var correct = Object.keys(state.correctSet||{}).length;
+    scoreBadgeEl.textContent = total>0 ? ("Acertos: "+correct+"/"+total) : "";
+  }
+
+  function render(){
+    var idx = state.cur;
+    var s = SLIDES[idx];
+    stageEl.innerHTML = "";
+    var slideDiv = el("div","slide");
+    s.build(slideDiv);
+    stageEl.appendChild(slideDiv);
+    document.getElementById("stageWrap").scrollTop = 0;
+
+    state.visited[idx] = true; save();
+
+    crumbEl.innerHTML = "<strong>"+MODULES.find(function(m){return m.id===s.mod;}).name+"</strong> — "+s.title;
+    countEl.textContent = (idx+1)+" / "+SLIDES.length;
+    progressFillEl.style.width = (100*Object.keys(state.visited).length/SLIDES.length)+"%";
+    updateScoreBadge();
+
+    Array.prototype.forEach.call(railModulesEl.querySelectorAll(".rail-item"), function(it){
+      var i = parseInt(it.getAttribute("data-idx"),10);
+      it.classList.toggle("current", i===idx);
+      it.classList.toggle("visited", !!state.visited[i]);
+    });
+
+    prevBtn.disabled = idx===0;
+    nextBtn.disabled = idx===SLIDES.length-1;
+    prevBtn.title = idx>0 ? "Anterior: "+SLIDES[idx-1].title : "Anterior";
+    nextBtn.title = idx<SLIDES.length-1 ? "Próximo: "+SLIDES[idx+1].title : "Próximo";
+  }
+
+  function goTo(i){
+    if(i<0||i>=SLIDES.length) return;
+    state.cur = i; save();
+    render();
+    collapseAllRailMods(SLIDES[i].mod);
+    if(window.innerWidth<=860) document.getElementById("rail").classList.remove("open");
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+  if(document.readyState!=="loading") init();
+
+  function init(){
+    railModulesEl = document.getElementById("railModules");
+    stageEl = document.getElementById("stage");
+    crumbEl = document.getElementById("crumb");
+    countEl = document.getElementById("slideCount");
+    progressFillEl = document.getElementById("progressFill");
+    scoreBadgeEl = document.getElementById("scoreBadge");
+    prevBtn = document.getElementById("prevBtn");
+    nextBtn = document.getElementById("nextBtn");
+
+    MODULES.forEach(function(m){
+      if(m.id==="inicio"){
+        var i0 = modToIndices[m.id][0];
+        var soloItem = el("button","rail-item", "<span class='dot'></span><span>"+m.name+"</span>");
+        soloItem.style.fontWeight = "700";
+        soloItem.setAttribute("data-idx", i0);
+        soloItem.addEventListener("click", function(){ goTo(i0); });
+        railModulesEl.appendChild(soloItem);
+        return;
+      }
+      var modWrap = el("div","rail-mod collapsed");
+      modWrap.setAttribute("data-mod", m.id);
+      var head = el("div","rail-mod-head", "<span class='num'>▸</span><span>"+m.name+"</span>");
+      var slidesWrap = el("div","rail-slides");
+      slidesWrap.style.display = "none";
+      head.addEventListener("click", function(){
+        if(modWrap.classList.contains("collapsed")) collapseAllRailMods(m.id);
+        else collapseAllRailMods(null);
+      });
+      modWrap.appendChild(head);
+      (modToIndices[m.id]||[]).forEach(function(i){
+        var item = el("button","rail-item", "<span class='dot'></span><span>"+SLIDES[i].title+"</span>");
+        item.addEventListener("click", function(){ goTo(i); });
+        item.setAttribute("data-idx", i);
+        slidesWrap.appendChild(item);
+      });
+      modWrap.appendChild(slidesWrap);
+      railModulesEl.appendChild(modWrap);
+    });
+
+    prevBtn.addEventListener("click", function(){ goTo(state.cur-1); });
+    nextBtn.addEventListener("click", function(){ goTo(state.cur+1); });
+
+    document.addEventListener("keydown", function(e){
+      if(e.target && (e.target.tagName==="INPUT" || e.target.tagName==="TEXTAREA" || e.target.tagName==="SELECT")) return;
+      if(e.key==="ArrowRight" || e.key===" "){ e.preventDefault(); goTo(state.cur+1); }
+      else if(e.key==="ArrowLeft"){ e.preventDefault(); goTo(state.cur-1); }
+      else if(e.key==="Escape"){ exitImmersive(); }
+    });
+
+    document.getElementById("railToggle").addEventListener("click", function(){
+      document.getElementById("rail").classList.toggle("open");
+    });
+
+    var deckRoot = document.getElementById("deckRoot");
+    function exitImmersive(){
+      deckRoot.classList.remove("immersive");
+      if(document.fullscreenElement){ try{ document.exitFullscreen(); }catch(e){} }
+    }
+    function enterImmersive(){
+      deckRoot.classList.add("immersive");
+      var p = deckRoot.requestFullscreen ? deckRoot.requestFullscreen() : null;
+      if(p && p.catch) p.catch(function(){});
+    }
+    document.getElementById("fullscreenBtn").addEventListener("click", function(){
+      if(deckRoot.classList.contains("immersive")) exitImmersive(); else enterImmersive();
+    });
+    document.addEventListener("fullscreenchange", function(){
+      if(!document.fullscreenElement) deckRoot.classList.remove("immersive");
+    });
+
+    var THEME_KEY = "sst_qvt_theme";
+    var themeBtn = document.getElementById("themeBtn");
+    var themePref = "auto";
+    try{ themePref = localStorage.getItem(THEME_KEY) || "auto"; }catch(e){}
+    function applyTheme(pref){
+      if(pref==="light" || pref==="dark") document.documentElement.setAttribute("data-theme", pref);
+      else document.documentElement.removeAttribute("data-theme");
+      var icon = pref==="light" ? "☀" : (pref==="dark" ? "🌙" : "◐");
+      var label = pref==="light" ? "claro" : (pref==="dark" ? "escuro" : "automático (sistema)");
+      themeBtn.textContent = icon;
+      themeBtn.title = "Tema: "+label+" — toque para alternar";
+    }
+    applyTheme(themePref);
+    themeBtn.addEventListener("click", function(){
+      themePref = themePref==="auto" ? "light" : (themePref==="light" ? "dark" : "auto");
+      try{ localStorage.setItem(THEME_KEY, themePref); }catch(e){}
+      applyTheme(themePref);
+    });
+
+    if(state.cur>=SLIDES.length) state.cur = 0;
+    render();
+  }
+})();
+</script>
+</body>
+</html>
